@@ -34,6 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true"
         tools:context=".fragment.DetailProductFragment">
 
         <View
@@ -98,6 +100,9 @@
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:text="@{name}"
+                android:textColor="@color/main_color"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vpSlide"
                 app:layout_constraintTop_toTopOf="@id/vpSlide" />
@@ -107,6 +112,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{prices}"
+                android:textColor="@color/main_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vpSlide"
                 app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -116,6 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@{description}"
+                android:textColor="@color/main_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/vpSlide"
                 app:layout_constraintTop_toBottomOf="@id/tvPrices" />
@@ -133,8 +140,11 @@
                 android:id="@+id/tvSl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_8"
                 android:text="Số Lượng"
+                android:textColor="@color/teal_200"
                 android:textSize="20sp"
+                app:layout_constraintEnd_toStartOf="@id/imgMinus"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
@@ -142,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_minus"
-                app:layout_constraintStart_toEndOf="@id/tvSl"
+                app:layout_constraintEnd_toStartOf="@id/tvCount"
                 app:layout_constraintTop_toTopOf="@id/tvSl" />
 
             <TextView
@@ -151,15 +161,16 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@{countItem.toString()}"
-                app:layout_constraintStart_toEndOf="@id/imgMinus"
-                app:layout_constraintTop_toTopOf="@id/tvSl" />
+                app:layout_constraintBottom_toBottomOf="@id/imgPlus"
+                app:layout_constraintEnd_toStartOf="@id/imgPlus"
+                app:layout_constraintTop_toTopOf="@id/imgPlus" />
 
             <ImageView
                 android:id="@+id/imgPlus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_plus"
-                app:layout_constraintStart_toEndOf="@id/tvCount"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/tvCount" />
 
             <TextView
@@ -168,6 +179,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_20"
                 android:text="Tổng Tiền"
+                android:textColor="@color/main_color"
+                android:textSize="30sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvSl" />
 
@@ -175,7 +189,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:textColor="@color/teal_200"
+                android:textSize="30sp"
                 app:counter="@{countItem}"
+                app:layout_constraintBottom_toBottomOf="@id/tvTongTien"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTongTien"
                 app:layout_constraintTop_toTopOf="@id/tvTongTien"

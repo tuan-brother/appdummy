@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.app_ban_hang_tot_nghiep.ApiService;
 import com.example.app_ban_hang_tot_nghiep.ApiUtils;
 import com.example.app_ban_hang_tot_nghiep.model.Cart;
+import com.example.app_ban_hang_tot_nghiep.model.CartData;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
 
@@ -32,7 +33,7 @@ public class MainViewModel extends ViewModel {
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if (response.isSuccessful()) {
                     listCate.postValue(response.body());
-                    Log.d("TAG", "onResponse: " + response.body().size());
+                    Log.d("TAG876", "onResponse: " + response.body().size());
                 }
             }
 
@@ -65,17 +66,31 @@ public class MainViewModel extends ViewModel {
 
     public void getListCartData(String token) {
         mApiService = ApiUtils.getApiService();
-        mApiService.getCart(token).enqueue(new Callback<Cart>() {
+//        mApiService.getCart(token).enqueue(new Callback<Cart>() {
+//            @Override
+//            public void onResponse(Call<Cart> call, Response<Cart> response) {
+//                Log.d("TAG456", "cart:  " + response.body());
+//                if (response.isSuccessful()) {
+//                    Log.d("TAG456", "cart:  " + response.body().getProducts());
+//                    listCart.postValue(response.body());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Cart> call, Throwable t) {
+//                Log.d("TAG456", "cart:  " + t.getMessage());
+//            }
+//        });
+
+        mApiService.getCart(token).enqueue(new Callback<CartData>() {
             @Override
-            public void onResponse(Call<Cart> call, Response<Cart> response) {
-                if (response.isSuccessful()) {
-                    listCart.postValue(response.body());
-                }
+            public void onResponse(Call<CartData> call, Response<CartData> response) {
+                Log.d("TAG111", "onResponse: " + response.body());
             }
 
             @Override
-            public void onFailure(Call<Cart> call, Throwable t) {
-
+            public void onFailure(Call<CartData> call, Throwable t) {
+                Log.d("TAG111", "onFailure: " + t.getMessage());
             }
         });
     }

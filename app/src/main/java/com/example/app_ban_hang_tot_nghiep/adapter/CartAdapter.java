@@ -8,20 +8,21 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_hang_tot_nghiep.databinding.ItemHomeProductBinding;
+import com.example.app_ban_hang_tot_nghiep.model.ItemProductCartItem;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
 
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    //Dữ liệu hiện thị là danh sách sinh viên
-    private List<Product> mProductList;
+
+    private List<ItemProductCartItem> mCartList;
     // Lưu Context để dễ dàng truy cập
     private Context mContext;
 
     private CartAdapter.onItemClick onClick;
 
-    public CartAdapter(List<Product> _student, Context mContext, CartAdapter.onItemClick onClick) {
-        this.mProductList = _student;
+    public CartAdapter(List<ItemProductCartItem> mCart, Context mContext, CartAdapter.onItemClick onClick) {
+        this.mCartList = mCart;
         this.mContext = mContext;
         this.onClick = onClick;
     }
@@ -38,19 +39,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(CartAdapter.ViewHolder holder, int position) {
-        Product data = mProductList.get(position);
-        holder.onBind(data);
-        holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClick.ItemClick(data);
-            }
-        });
+//        Product data = mProductList.get(position);
+//        holder.onBind(data);
+//        holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onClick.ItemClick(data);
+//            }
+//        });
     }
 
     @Override
     public int getItemCount() {
-        return mProductList.size();
+        return mCartList.size();
     }
 
     /**
@@ -65,13 +66,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             mBinding = binding;
         }
 
-        public void onBind(Product items) {
+        public void onBind(ItemProductCartItem items) {
             mBinding.tvPrices.setText(items.getPrice() + "");
-            mBinding.setUrlImage(items.getImage().get(0));
+//            mBinding.setUrlImage(items.getImage().get(0));
         }
     }
 
     public interface onItemClick {
-        public void ItemClick(Product items);
+        public void ItemClick(ItemProductCartItem items);
     }
 }

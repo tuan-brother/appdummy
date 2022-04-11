@@ -1,6 +1,7 @@
 package com.example.app_ban_hang_tot_nghiep;
 
 import com.example.app_ban_hang_tot_nghiep.model.Cart;
+import com.example.app_ban_hang_tot_nghiep.model.CartData;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.model.Token;
@@ -13,7 +14,11 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiService {
@@ -40,7 +45,8 @@ public interface ApiService {
     Call<Cart> addProductToCart(@Path("idProduct") String productId, @Field("token") String token, @Field("amount") int amount);
 
     @GET("api/cart/getcart")
-    Call<Cart> getCart(@Field("token") String token);
+    @Headers({"Content-Type:application/x-www-form-urlencoded"})
+    Call<CartData> getCart(@Field(value = "token") String token);
 
     @GET("api/bills/get")
     Call<Cart> getBill(@Field("token") String token);

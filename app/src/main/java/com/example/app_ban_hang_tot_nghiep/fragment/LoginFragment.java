@@ -79,7 +79,7 @@ public class LoginFragment extends Fragment {
         });
         mLoginBinding.btnRegister.setOnClickListener(view -> {
             FragmentManager fragmentManager = getParentFragmentManager();
-            fragmentManager.beginTransaction().add(R.id.containerLayout, new RegisterFragment(), "register").commit();
+            fragmentManager.beginTransaction().add(R.id.containerLogin, new RegisterFragment(), "register").commit();
         });
     }
 }

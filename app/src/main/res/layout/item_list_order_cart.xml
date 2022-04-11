@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
     <data>
 
@@ -22,38 +21,31 @@
             type="String" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp_10">
+        android:layout_height="wrap_content">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <ImageView
             android:id="@+id/imgProduct"
             imageUrl="@{urlImage}"
             android:layout_width="123dp"
             android:layout_height="123dp"
-            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:riv_border_width="@dimen/dp_1"
-            app:riv_corner_radius="@dimen/dp_16" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_20"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{title}"
-            android:textColor="@color/main_color"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintVertical_chainStyle="spread"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvPrices"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tvPrices"
             app:layout_constraintStart_toEndOf="@id/imgProduct"
-            app:layout_constraintTop_toTopOf="@id/imgProduct" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvPrices"
@@ -62,12 +54,9 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{prices}"
-            android:textColor="@color/main_color"
-            android:textSize="16sp"
-            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/tvInFo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintStart_toEndOf="@id/imgProduct"
             app:layout_constraintTop_toBottomOf="@id/tvName" />
 
         <TextView
@@ -77,19 +66,11 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{des}"
-            android:textColor="@color/main_color"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@id/imgProduct"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintStart_toEndOf="@id/imgProduct"
             app:layout_constraintTop_toBottomOf="@id/tvPrices" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_2"
-            android:layout_marginTop="@dimen/dp_10"
-            android:background="@color/main_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgProduct" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

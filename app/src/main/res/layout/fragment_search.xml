@@ -7,7 +7,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ff0">
+        android:background="@color/white"
+        android:clickable="true"
+        android:focusable="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/viewController"
@@ -74,6 +76,7 @@
             <EditText
                 android:id="@+id/edtSearch"
                 android:layout_width="0dp"
+                android:hint="@string/input_key"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="@id/imgSearch"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -85,11 +88,12 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleProduct"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="@dimen/dp_12"
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ctlSearch"
             tools:listitem="@layout/item_list_product_category" />
