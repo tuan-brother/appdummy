@@ -98,7 +98,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
         TextView lblListHeader = convertView.findViewById(R.id.lblListItem);
-        lblListHeader.setText(headerTitle);
+//        lblListHeader.setText(headerTitle);
         ImageView imageView = convertView.findViewById(R.id.imgCategory);
         Glide.with(context).load(urlImage).into(imageView);
         return convertView;

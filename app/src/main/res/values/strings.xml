@@ -14,6 +14,7 @@
     <string name="navigation_open">Open</string>
     <string name="navigation_close">Close</string>
     <string name="detail_product">Chi Tiết Sản Phẩm</string>
+    <string name="pay">Thanh Toán</string>
 
     //menu
     <string name="main">Trang Chủ</string>
@@ -24,4 +25,15 @@
     <string name="sing_out">Đăng Xuất</string>
     <string name="main_home">Trang Chủ</string>
     <string name="search">Tìm kiếm</string>
+    <string name="pay_type">Hỉnh thức thanh toán</string>
+    <string name="pay_when_receiver">Thanh toán khi nhận hàng</string>
+    <string name="note">Ghi chú</string>
+    <string name="ship_code">Phí chuyển phát</string>
+
+    //pay
+    <string name="location">Nhập Địa Chỉ Giao Hàng</string>
+    <string name="phone">Nhập Số Điện Thoại</string>
+    <string name="mail">Nhập Địa Chỉ Email</string>
+    <string name="name_user">Nhập Tên Người Nhận</string>
+    <string name="input_key">Nhập từ khóa</string>
 </resources>

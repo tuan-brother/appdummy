@@ -70,6 +70,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         public void onBind(Product items) {
             mBinding.tvPrices.setText(new Utils().convertMoney(items.getPrice()));
             mBinding.setUrlImage(items.getImage().get(0));
+            mBinding.tvName.setText(items.getName());
         }
     }
 
