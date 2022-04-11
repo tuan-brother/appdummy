@@ -20,6 +20,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -44,9 +45,9 @@ public interface ApiService {
     @POST("api/cart/add/{idProduct}")
     Call<Cart> addProductToCart(@Path("idProduct") String productId, @Field("token") String token, @Field("amount") int amount);
 
+    @Headers("Content-Type: application/json")
     @GET("api/cart/getcart")
-    @Headers({"Content-Type:application/x-www-form-urlencoded"})
-    Call<CartData> getCart(@Field(value = "token") String token);
+    Call<CartData> getCart(@Query(value = "token") String token);
 
     @GET("api/bills/get")
     Call<Cart> getBill(@Field("token") String token);
