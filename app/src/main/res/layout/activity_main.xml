@@ -87,7 +87,7 @@
 
                     <include
                         android:id="@+id/information"
-                        layout="@layout/listgroupheader" />
+                        layout="@layout/item_infordev" />
                 </LinearLayout>
             </com.google.android.material.navigation.NavigationView>
 

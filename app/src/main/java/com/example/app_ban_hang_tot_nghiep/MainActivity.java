@@ -45,8 +45,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     public ActivityMainBinding mBinding;
     public MainViewModel mViewModel;
-    ExpandableListAdapter expandableListAdapter;
+    public ExpandableListAdapter expandableListAdapter;
     List<Category> headerList = new ArrayList<>();
+    List<String> listDemo = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
     private SliderAdapterExample adapter;
 
@@ -54,11 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-//        setSupportActionBar(mBinding.toolbar);
         setUpViewModel();
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mBinding.drawerLayout, mBinding.toolbar, R.string.navigation_open, R.string.navigation_close);
-//        mBinding.drawerLayout.addDrawerListener(toggle);
-//        toggle.syncState();
         mBinding.navigationView.setNavigationItemSelectedListener(this);
         addHome();
         setUpSlider();
@@ -124,7 +121,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         mViewModel.getListCategory();
         mViewModel.listCate.observe(this, data -> {
+            headerList.clear();
             headerList.addAll(data);
+            expandableListAdapter.notifyDataSetChanged();
         });
     }
 
@@ -132,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void populateExpandableList() {
-
         expandableListAdapter = new ExpandableListAdapter(this, headerList, new HashMap<>());
         mBinding.expandableListView.setAdapter(expandableListAdapter);
 
@@ -141,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().add(R.id.parent_content, new CatorogyCommonFragment().newInstance(headerList.get(groupPosition).getName(), headerList.get(groupPosition).getId() + ""), "catetory").commit();
-                mBinding.drawerLayout.closeDrawer(GravityCompat.START);
+                mBinding.drawerLayout.closeDrawers();
                 return false;
             }
         });
@@ -150,18 +148,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-                if (childList.get(headerList.get(groupPosition)) != null) {
-                    MenuModel model = childList.get(headerList.get(groupPosition)).get(childPosition);
-
-                }
-
                 return false;
             }
         });
     }
 
     private void onClick() {
-        mBinding.information.getRoot().setOnClickListener(new View.OnClickListener() {
+        mBinding.information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), InforDevActivity.class);

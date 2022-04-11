@@ -12,7 +12,7 @@
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/activity_welcome.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_cart.xml" value="0.25" />
-        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_catorogy_common.xml" value="0.11927083333333334" />
+        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_catorogy_common.xml" value="0.2" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_detail_product.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_forgot_password.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_home.xml" value="0.25" />
@@ -23,6 +23,7 @@
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_start.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/image_slider_layout_item.xml" value="0.12135416666666667" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_home_product.xml" value="0.25" />
+        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_infordev.xml" value="0.2" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_layout_home_controller.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_layout_pay.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_list_order_cart.xml" value="0.26197916666666665" />
@@ -31,6 +32,8 @@
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_view_pager.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/layout_header_navigation.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/list_group_child.xml" value="0.12291666666666666" />
+        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/list_groups.xml" value="0.25" />
+        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/list_item.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/listgroupheader.xml" value="0.176" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/menu/menu_navigation.xml" value="0.25" />
       </map>

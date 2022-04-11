@@ -21,8 +21,9 @@
 
             <ImageView
                 android:id="@+id/imgBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="@dimen/dp_48"
+                android:padding="@dimen/dp_8"
                 android:layout_marginStart="@dimen/dp_10"
                 android:src="@mipmap/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -45,8 +46,9 @@
 
             <ImageView
                 android:id="@+id/imgBackHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_48"
+                android:layout_height="@dimen/dp_48"
+                android:padding="@dimen/dp_8"
                 android:layout_marginEnd="@dimen/dp_10"
                 android:src="@mipmap/ic_home"
                 app:layout_constraintBottom_toBottomOf="@id/imgBack"
