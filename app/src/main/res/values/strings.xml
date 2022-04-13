@@ -36,4 +36,7 @@
     <string name="mail">Nhập Địa Chỉ Email</string>
     <string name="name_user">Nhập Tên Người Nhận</string>
     <string name="input_key">Nhập từ khóa</string>
+    <string name="total_money">Tổng Tiền</string>
+    <string name="sell">Mua Hàng</string>
+    <string name="continue_h">Tiếp Tục Mua Hàng</string>
 </resources>

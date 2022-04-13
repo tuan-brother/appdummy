@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
@@ -15,7 +16,9 @@ import android.view.ViewGroup;
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.adapter.CartAdapter;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentCartBinding;
+import com.example.app_ban_hang_tot_nghiep.model.ItemCartMoreInfo;
 import com.example.app_ban_hang_tot_nghiep.model.ItemProductCartItem;
+import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -37,7 +40,7 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
     private FragmentCartBinding mBinding;
     private MainViewModel mViewModel;
     private CartAdapter mAdapter;
-    public List<ItemProductCartItem> mListData = new ArrayList<>();
+    public List<ItemCartMoreInfo> mListData = new ArrayList<>();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -72,15 +75,62 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
         mBinding = FragmentCartBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
         setUpAdapter();
+        mBinding.spinKit.setVisibility(View.VISIBLE);
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         String token = sharedPreferences.getString("tokenID", "xxx");
         Log.d("TAG567", "onCreateView: " + token);
         mViewModel.getListCartData(token);
         mViewModel.listCart.observe(getViewLifecycleOwner(), cart -> {
-            if (cart.getProducts().size() > 0) {
-                mListData.clear();
-                mListData.addAll(cart.getProducts());
-                mBinding.recycleCart.getAdapter().notifyDataSetChanged();
+            List<ItemCartMoreInfo> listItem = new ArrayList<>();
+            Log.d("TAG444", "onCreateView: " + mViewModel.listSearch.size());
+            for (int i = 0; i < cart.getProducts().size(); i++) {
+                for (int j = 0; j < mViewModel.listSearch.size(); j++) {
+                    Log.d("TAG555", "onCreateView: " + cart.getProducts().get(i).getProductName() + "parent" + mViewModel.listSearch.get(j).getId().toString());
+                    if (cart.getProducts().get(i).getProductId().equals(mViewModel.listSearch.get(j).getId())) {
+                        ItemCartMoreInfo itemCart = new ItemCartMoreInfo();
+                        itemCart.setAmount(cart.getProducts().get(i).getAmount());
+                        itemCart.setPrice(cart.getProducts().get(i).getPrice());
+                        itemCart.setImage(mViewModel.listSearch.get(j).getImage().get(0));
+                        itemCart.setProductName(cart.getProducts().get(i).getProductName());
+                        itemCart.setProductId(cart.getProducts().get(i).getProductId());
+                        listItem.add(itemCart);
+                    }
+                }
+            }
+            mBinding.tvTotalShow.setText(new Utils().convertMoney(cart.getTotal()));
+            mBinding.spinKit.setVisibility(View.GONE);
+            mListData.clear();
+            mListData.addAll(listItem);
+            mBinding.recycleCart.getAdapter().notifyDataSetChanged();
+        });
+        onClick();
+
+        Log.d("TAG765", "onCreateView: " + mViewModel.listSearch.size());
+        // Inflate the layout for this fragment
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void ItemClick(ItemCartMoreInfo items) {
+
+    }
+
+    public void setUpAdapter() {
+        mAdapter = new CartAdapter(mListData, getContext(), this);
+        mBinding.recycleCart.setAdapter(mAdapter);
+    }
+
+    public void onClick() {
+        mBinding.tvContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+        mBinding.tvBuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToPay();
             }
         });
         mBinding.imgBack.setOnClickListener(new View.OnClickListener() {
@@ -89,18 +139,11 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
                 getActivity().onBackPressed();
             }
         });
-        Log.d("TAG765", "onCreateView: " + mViewModel.listSearch.size());
-        // Inflate the layout for this fragment
-        return mBinding.getRoot();
-    }
-
-    @Override
-    public void ItemClick(ItemProductCartItem items) {
 
     }
 
-    public void setUpAdapter() {
-        mAdapter = new CartAdapter(mListData, getContext(), this);
-        mBinding.recycleCart.setAdapter(mAdapter);
+    public void goToPay() {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.parent_content, new PayFragment().newInstance("ddd", "aaaa"), "pay").commit();
     }
 }

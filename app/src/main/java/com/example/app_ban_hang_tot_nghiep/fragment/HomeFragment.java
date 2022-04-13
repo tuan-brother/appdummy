@@ -19,13 +19,14 @@ import com.example.app_ban_hang_tot_nghiep.databinding.FragmentHomeBinding;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.view.decor.GridSpacingItemDecoration;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.HomeViewModel;
+import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements HomeAdapter.onItemClick {
 
-    public HomeViewModel mViewModel;
+    public MainViewModel mViewModel;
     public FragmentHomeBinding mBinding;
     public HomeAdapter mHomeAdapter;
     public List<Product> mProductList = new ArrayList<>();
@@ -45,9 +46,9 @@ public class HomeFragment extends Fragment implements HomeAdapter.onItemClick {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = FragmentHomeBinding.inflate(inflater, container, false);
-        mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        mViewModel.getListData();
-        mViewModel.listData.observe(getViewLifecycleOwner(), data -> {
+        mViewModel = ViewModelProviders.of(requireActivity()).get(MainViewModel.class);
+        mViewModel.getListHomeData();
+        mViewModel.listHomeData.observe(getViewLifecycleOwner(), data -> {
             mBinding.spinKit.setVisibility(View.GONE);
             mProductList.clear();
             mProductList.addAll(data);
