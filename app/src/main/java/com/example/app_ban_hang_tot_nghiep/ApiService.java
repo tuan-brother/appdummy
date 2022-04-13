@@ -45,9 +45,8 @@ public interface ApiService {
     @POST("api/cart/add/{idProduct}")
     Call<Cart> addProductToCart(@Path("idProduct") String productId, @Field("token") String token, @Field("amount") int amount);
 
-    @Headers("Content-Type: application/json")
-    @GET("api/cart/getcart")
-    Call<CartData> getCart(@Query(value = "token") String token);
+    @GET("api/cart/getcart/{token}")
+    Call<Cart> getCart(@Path("token") String tokenUser);
 
     @GET("api/bills/get")
     Call<Cart> getBill(@Field("token") String token);

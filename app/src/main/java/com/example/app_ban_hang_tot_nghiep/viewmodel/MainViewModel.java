@@ -1,6 +1,7 @@
 package com.example.app_ban_hang_tot_nghiep.viewmodel;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -23,6 +24,7 @@ public class MainViewModel extends ViewModel {
     public ApiService mApiService;
     public MutableLiveData<List<Category>> listCate = new MutableLiveData<>();
     public MutableLiveData<List<Product>> listData = new MutableLiveData<>();
+    public MutableLiveData<List<Product>> listHomeData = new MutableLiveData<>();
     public MutableLiveData<Cart> listCart = new MutableLiveData<>();
     public List<Product> listSearch = new ArrayList<>();
 
@@ -64,33 +66,41 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-    public void getListCartData(String token) {
+    public void getListHomeData() {
         mApiService = ApiUtils.getApiService();
-//        mApiService.getCart(token).enqueue(new Callback<Cart>() {
-//            @Override
-//            public void onResponse(Call<Cart> call, Response<Cart> response) {
-//                Log.d("TAG456", "cart:  " + response.body());
-//                if (response.isSuccessful()) {
-//                    Log.d("TAG456", "cart:  " + response.body().getProducts());
-//                    listCart.postValue(response.body());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Cart> call, Throwable t) {
-//                Log.d("TAG456", "cart:  " + t.getMessage());
-//            }
-//        });
-
-        mApiService.getCart(token).enqueue(new Callback<CartData>() {
+        mApiService.getListProducts().enqueue(new Callback<List<Product>>() {
             @Override
-            public void onResponse(Call<CartData> call, Response<CartData> response) {
-                Log.d("TAG111", "onResponse: " + response.body());
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()) {
+                    listSearch.clear();
+                    listSearch.addAll(response.body());
+                    listHomeData.postValue(response.body());
+                    Log.d("TAG", "onResponse: " + response.body().size());
+                }
             }
 
             @Override
-            public void onFailure(Call<CartData> call, Throwable t) {
-                Log.d("TAG111", "onFailure: " + t.getMessage());
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getListCartData(String token) {
+        mApiService = ApiUtils.getApiService();
+
+        mApiService.getCart(token).enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                if (response.isSuccessful()) {
+                    Log.d("TAG444", "onResponse: " + token);
+                    Log.d("TAG444", "onCart:  " + response.body().getProducts().get(0).getProductId());
+                    listCart.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
             }
         });
     }

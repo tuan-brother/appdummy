@@ -42,7 +42,7 @@ public class DetailProductFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private int count = 1;
-    private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNDI2MWZjNGY3ZDE4MDBkNDZiMmY5NCIsImVtYWlsIjoicGh1bmd0dWFuYW5oeHlAZ21haWwuY29tIiwiaWF0IjoxNjQ4NTE3NjI5fQ.Hum_SZH1UwgrCieQTGOkYkvuLsU_yynOz-apzRCFrKU";
+    private String token = "";
     private String id;
     private String name;
     private Integer prices;
@@ -132,9 +132,10 @@ public class DetailProductFragment extends Fragment {
                     startActivity(intent);
                     return;
                 }
+                token = mSharedPreferences.getString("tokenID", "xxx");
                 Log.d("TAG234", "onClick: " + id);
                 mBinding.spinKit.setVisibility(View.VISIBLE);
-                mViewModel.addProductToCart("6216068d570e2f46868f8f9b", token, count);
+                mViewModel.addProductToCart(id, token, count);
             }
         });
     }
