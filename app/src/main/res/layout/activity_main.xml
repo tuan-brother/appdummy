@@ -77,6 +77,10 @@
                         android:id="@+id/homeScreen"
                         layout="@layout/listgroupheader" />
 
+                    <include
+                        android:id="@+id/information"
+                        layout="@layout/item_infordev" />
+
                     <ExpandableListView
                         android:id="@+id/expandableListView"
                         android:layout_width="match_parent"
@@ -84,10 +88,6 @@
                         android:background="@android:color/white"
                         android:dividerHeight="0dp"
                         android:groupIndicator="@null" />
-
-                    <include
-                        android:id="@+id/information"
-                        layout="@layout/item_infordev" />
 
                     <include
                         android:id="@+id/itemLogin"

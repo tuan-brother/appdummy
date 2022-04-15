@@ -163,10 +163,9 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
         PayFragment fragment = new PayFragment().newInstance(mCart.getTotal(), new PayFragment.onBackSuccess() {
             @Override
             public void onSuccess() {
-                PayFragment fragmentController = PayFragment.getInstance();
-                requireActivity().getSupportFragmentManager().beginTransaction().remove(requireActivity().getSupportFragmentManager().findFragmentById(R.id.parent_content)).commit();
+                fragmentManager.beginTransaction().remove(fragmentManager.findFragmentByTag("cart")).commit();
             }
         });
-        fragmentManager.beginTransaction().add(R.id.parent_content, fragment, "pay").addToBackStack("toPay").commit();
+        fragmentManager.beginTransaction().add(R.id.parent_content, fragment, "pay").commit();
     }
 }

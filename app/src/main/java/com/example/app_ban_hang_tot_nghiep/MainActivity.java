@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivityForResult(intent,6677);
+                startActivityForResult(intent, 6677);
             }
         });
         mBinding.incController.imgSearch.setOnClickListener(new View.OnClickListener() {
@@ -216,6 +216,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("TAG", "onActivityResult: " + requestCode + "--" + resultCode);
         if (requestCode == 6677 && resultCode == 6688) {
             mBinding.itemLogin.setVisibility(View.GONE);
         }
@@ -264,5 +265,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void gotoCart() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.parent_content, new CartFragment(), "cart").commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }
