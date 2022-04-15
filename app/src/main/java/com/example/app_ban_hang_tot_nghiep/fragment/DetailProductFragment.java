@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -129,7 +130,7 @@ public class DetailProductFragment extends Fragment {
             public void onClick(View view) {
                 if (mSharedPreferences.getString("tokenID", "xxx").equals("xxx")) {
                     Intent intent = new Intent(requireContext(), LoginActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, 6677);
                     return;
                 }
                 token = mSharedPreferences.getString("tokenID", "xxx");

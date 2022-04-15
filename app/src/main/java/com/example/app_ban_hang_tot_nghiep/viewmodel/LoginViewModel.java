@@ -16,6 +16,7 @@ import retrofit2.Response;
 public class LoginViewModel extends ViewModel {
     public ApiService mApiService;
     public MutableLiveData<Boolean> isLoginSucess = new MutableLiveData<>();
+    public MutableLiveData<Boolean> accountNotSuccess = new MutableLiveData<>();
     public MutableLiveData<Token> token = new MutableLiveData<>();
     public MutableLiveData<Boolean> isVerify = new MutableLiveData<>();
 
@@ -24,12 +25,14 @@ public class LoginViewModel extends ViewModel {
         mApiService.getAnswers(email, password).enqueue(new Callback<Token>() {
             @Override
             public void onResponse(Call<Token> call, Response<Token> response) {
-                if (response.isSuccessful() && response.body().token != null) {
+                if (response.isSuccessful() && response.code() == 200) {
                     isLoginSucess.postValue(true);
                     token.postValue(response.body());
-                    return;
+                } else if (response.code() == 404) {
+                    accountNotSuccess.postValue(true);
+                } else {
+                    isVerify.postValue(true);
                 }
-                isVerify.postValue(true);
             }
 
             @Override

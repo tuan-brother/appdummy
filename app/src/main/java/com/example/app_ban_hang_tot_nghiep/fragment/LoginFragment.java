@@ -68,8 +68,15 @@ public class LoginFragment extends Fragment {
             mSharedPreferences.putString("tokenID", token.token).apply();
         });
         mViewModel.isVerify.observe(getViewLifecycleOwner(), data -> {
+            mLoginBinding.spinKit.setVisibility(View.GONE);
             if (data) {
                 Toast.makeText(requireContext(), "Bạn cần xác nhận thông tin qua mail trước khi đăng nhập", Toast.LENGTH_SHORT).show();
+            }
+        });
+        mViewModel.accountNotSuccess.observe(getViewLifecycleOwner(), data -> {
+            mLoginBinding.spinKit.setVisibility(View.GONE);
+            if (data) {
+                Toast.makeText(requireContext(), "Tài khoản không chính xác", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentPayBinding;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
+import com.example.app_ban_hang_tot_nghiep.viewmodel.PayViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +33,7 @@ public class PayFragment extends Fragment {
     public onBackSuccess onBackSucessListener;
     private static int totalMoney;
     public SharedPreferences mSharedPreferences;
-    private MainViewModel mViewModel;
+    private PayViewModel mPayViewModel;
     static PayFragment payFragment;
 
     private FragmentPayBinding mBinding;
@@ -65,8 +67,9 @@ public class PayFragment extends Fragment {
         mBinding = FragmentPayBinding.inflate(inflater, container, false);
         mSharedPreferences = requireContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         mBinding.tvTotalMoney.setText(new Utils().convertMoney(totalMoney));
-        mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
-        mViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
+        mPayViewModel = ViewModelProviders.of(this).get(PayViewModel.class);
+        mPayViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
+            requireActivity().onBackPressed();
             mBinding.spinKit.setVisibility(View.GONE);
             Toast.makeText(requireContext(), "Add bill success", Toast.LENGTH_SHORT).show();
             if (onBackSucessListener != null) {
@@ -88,6 +91,10 @@ public class PayFragment extends Fragment {
         mBinding.tvDHOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mBinding.edtEmail.getText().toString().trim().equals("") | mBinding.edtLocation.getText().toString().trim().equals("") | mBinding.edtPersonal.getText().toString().trim().equals("") | mBinding.edtPhone.getText().toString().trim().equals("")) {
+                    Toast.makeText(requireContext(), "Vui lòng không để trống thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (mSharedPreferences.getString("tokenID", "xxx").equals("xxx")) {
                     Intent intent = new Intent(requireContext(), LoginActivity.class);
                     startActivity(intent);
@@ -95,7 +102,7 @@ public class PayFragment extends Fragment {
                 }
                 mBinding.spinKit.setVisibility(View.VISIBLE);
                 String token = mSharedPreferences.getString("tokenID", "xxx");
-                mViewModel.addBillstData(token);
+                mPayViewModel.addBillstData(mBinding.edtLocation.getText().toString(), mBinding.edtPhone.getText().toString(), mBinding.edtEmail.getText().toString(), mBinding.edtPersonal.getText().toString(), token);
             }
         });
     }

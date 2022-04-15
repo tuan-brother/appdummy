@@ -104,22 +104,4 @@ public class MainViewModel extends ViewModel {
             }
         });
     }
-
-    public void addBillstData(String token) {
-        mApiService = ApiUtils.getApiService();
-
-        mApiService.addBills(token).enqueue(new Callback<ResponeBill>() {
-            @Override
-            public void onResponse(Call<ResponeBill> call, Response<ResponeBill> response) {
-                if (response.isSuccessful()) {
-                    listBill.postValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponeBill> call, Throwable t) {
-
-            }
-        });
-    }
 }
