@@ -4,6 +4,7 @@ import com.example.app_ban_hang_tot_nghiep.model.Cart;
 import com.example.app_ban_hang_tot_nghiep.model.CartData;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
+import com.example.app_ban_hang_tot_nghiep.model.ResponeBill;
 import com.example.app_ban_hang_tot_nghiep.model.Token;
 import com.example.app_ban_hang_tot_nghiep.model.UserInfo;
 
@@ -29,6 +30,10 @@ public interface ApiService {
     Call<Token> getAnswers(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
+    @POST("api/users/forgot/password")
+    Call<String> forgotPass(@Field("email") String email);
+
+    @FormUrlEncoded
     @POST("api/users/create")
     Call<UserInfo> createInf(@Field("email") String email, @Field("password") String password, @Field("repassword") String repassword);
 
@@ -47,6 +52,10 @@ public interface ApiService {
 
     @GET("api/cart/getcart/{token}")
     Call<Cart> getCart(@Path("token") String tokenUser);
+
+    @FormUrlEncoded
+    @POST("api/bills/add")
+    Call<ResponeBill> addBills(@Field("token") String token);
 
     @GET("api/bills/get")
     Call<Cart> getBill(@Field("token") String token);

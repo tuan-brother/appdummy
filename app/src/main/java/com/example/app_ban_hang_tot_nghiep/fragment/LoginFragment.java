@@ -23,6 +23,7 @@ import com.example.app_ban_hang_tot_nghiep.viewmodel.LoginViewModel;
 
 public class LoginFragment extends Fragment {
 
+    public static final int RESULT_CODE_SUCCESS = 6688;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     public FragmentLoginBinding mLoginBinding;
     public SharedPreferences.Editor mSharedPreferences;
@@ -58,6 +59,7 @@ public class LoginFragment extends Fragment {
             if (!aBoolean) {
                 Toast.makeText(getContext(), "Login Failed", Toast.LENGTH_SHORT).show();
             } else {
+                requireActivity().setResult(RESULT_CODE_SUCCESS);
                 requireActivity().finish();
                 Toast.makeText(getContext(), "Login Success", Toast.LENGTH_SHORT).show();
             }
@@ -74,12 +76,24 @@ public class LoginFragment extends Fragment {
 
     public void onClick() {
         mLoginBinding.btnLogin.setOnClickListener(view -> {
+            if (mLoginBinding.edtAccount.getText().toString().trim().equals("") | mLoginBinding.edtPassword.getText().toString().trim().equals("")) {
+                Toast.makeText(requireContext(), "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
+                return;
+            }
             mLoginBinding.spinKit.setVisibility(View.VISIBLE);
-            mViewModel.logIn(mLoginBinding.edtAccount.getText().toString(), mLoginBinding.edtPassword.getText().toString());
+            mViewModel.logIn(mLoginBinding.edtAccount.getText().toString().trim(), mLoginBinding.edtPassword.getText().toString().trim());
         });
         mLoginBinding.btnRegister.setOnClickListener(view -> {
             FragmentManager fragmentManager = getParentFragmentManager();
             fragmentManager.beginTransaction().add(R.id.containerLogin, new RegisterFragment(), "register").commit();
+        });
+
+        mLoginBinding.btnForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getParentFragmentManager();
+                fragmentManager.beginTransaction().add(R.id.containerLogin, new ForgotPasswordFragment(), "forgot").commit();
+            }
         });
     }
 }

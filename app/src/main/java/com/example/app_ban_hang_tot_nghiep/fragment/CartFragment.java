@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.adapter.CartAdapter;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentCartBinding;
+import com.example.app_ban_hang_tot_nghiep.model.Cart;
 import com.example.app_ban_hang_tot_nghiep.model.ItemCartMoreInfo;
 import com.example.app_ban_hang_tot_nghiep.model.ItemProductCartItem;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
@@ -23,6 +25,10 @@ import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.michaelrocks.libphonenumber.android.NumberParseException;
+import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
+import io.michaelrocks.libphonenumber.android.Phonenumber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +47,8 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
     private MainViewModel mViewModel;
     private CartAdapter mAdapter;
     public List<ItemCartMoreInfo> mListData = new ArrayList<>();
+    public Cart mCart;
+    static CartFragment sCartFragment;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -52,12 +60,16 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
 
     // TODO: Rename and change types and number of parameters
     public static CartFragment newInstance(String param1, String param2) {
-        CartFragment fragment = new CartFragment();
+        sCartFragment = new CartFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+        sCartFragment.setArguments(args);
+        return sCartFragment;
+    }
+
+    public static CartFragment getInstance() {
+        return sCartFragment;
     }
 
     @Override
@@ -81,27 +93,31 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
         Log.d("TAG567", "onCreateView: " + token);
         mViewModel.getListCartData(token);
         mViewModel.listCart.observe(getViewLifecycleOwner(), cart -> {
+            mCart = cart;
             List<ItemCartMoreInfo> listItem = new ArrayList<>();
             Log.d("TAG444", "onCreateView: " + mViewModel.listSearch.size());
-            for (int i = 0; i < cart.getProducts().size(); i++) {
-                for (int j = 0; j < mViewModel.listSearch.size(); j++) {
-                    Log.d("TAG555", "onCreateView: " + cart.getProducts().get(i).getProductName() + "parent" + mViewModel.listSearch.get(j).getId().toString());
-                    if (cart.getProducts().get(i).getProductId().equals(mViewModel.listSearch.get(j).getId())) {
-                        ItemCartMoreInfo itemCart = new ItemCartMoreInfo();
-                        itemCart.setAmount(cart.getProducts().get(i).getAmount());
-                        itemCart.setPrice(cart.getProducts().get(i).getPrice());
-                        itemCart.setImage(mViewModel.listSearch.get(j).getImage().get(0));
-                        itemCart.setProductName(cart.getProducts().get(i).getProductName());
-                        itemCart.setProductId(cart.getProducts().get(i).getProductId());
-                        listItem.add(itemCart);
+            mBinding.spinKit.setVisibility(View.GONE);
+            if (mViewModel.listSearch.size() > 0) {
+
+                for (int i = 0; i < cart.getProducts().size(); i++) {
+                    for (int j = 0; j < mViewModel.listSearch.size(); j++) {
+                        Log.d("TAG555", "onCreateView: " + cart.getProducts().get(i).getProductName() + "parent" + mViewModel.listSearch.get(j).getId().toString());
+                        if (cart.getProducts().get(i).getProductId().equals(mViewModel.listSearch.get(j).getId())) {
+                            ItemCartMoreInfo itemCart = new ItemCartMoreInfo();
+                            itemCart.setAmount(cart.getProducts().get(i).getAmount());
+                            itemCart.setPrice(cart.getProducts().get(i).getPrice());
+                            itemCart.setImage(mViewModel.listSearch.get(j).getImage().get(0));
+                            itemCart.setProductName(cart.getProducts().get(i).getProductName());
+                            itemCart.setProductId(cart.getProducts().get(i).getProductId());
+                            listItem.add(itemCart);
+                        }
                     }
                 }
+                mBinding.tvTotalShow.setText(new Utils().convertMoney(cart.getTotal()));
+                mListData.clear();
+                mListData.addAll(listItem);
+                mBinding.recycleCart.getAdapter().notifyDataSetChanged();
             }
-            mBinding.tvTotalShow.setText(new Utils().convertMoney(cart.getTotal()));
-            mBinding.spinKit.setVisibility(View.GONE);
-            mListData.clear();
-            mListData.addAll(listItem);
-            mBinding.recycleCart.getAdapter().notifyDataSetChanged();
         });
         onClick();
 
@@ -144,6 +160,13 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
 
     public void goToPay() {
         FragmentManager fragmentManager = getParentFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.parent_content, new PayFragment().newInstance("ddd", "aaaa"), "pay").commit();
+        PayFragment fragment = new PayFragment().newInstance(mCart.getTotal(), new PayFragment.onBackSuccess() {
+            @Override
+            public void onSuccess() {
+                PayFragment fragmentController = PayFragment.getInstance();
+                requireActivity().getSupportFragmentManager().beginTransaction().remove(requireActivity().getSupportFragmentManager().findFragmentById(R.id.parent_content)).commit();
+            }
+        });
+        fragmentManager.beginTransaction().add(R.id.parent_content, fragment, "pay").addToBackStack("toPay").commit();
     }
 }

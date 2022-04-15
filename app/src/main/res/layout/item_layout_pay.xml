@@ -35,6 +35,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@null"
+            android:text="@{viewHint}"
             android:hint="@{viewHint}"
             app:layout_constraintBottom_toBottomOf="@id/imgIcon"
             app:layout_constraintEnd_toEndOf="parent"

@@ -55,8 +55,23 @@ public class RegisterFragment extends Fragment {
         mBinding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (mBinding.edtAccount.getText().toString().trim().equals("") | mBinding.edtPassword.getText().toString().trim().equals("") | mBinding.edtConfirm.getText().toString().trim().equals("")) {
+                    Toast.makeText(requireContext(), "Không được để trống trường thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!mBinding.edtPassword.getText().toString().trim().equals(mBinding.edtConfirm.getText().toString().trim())) {
+                    Toast.makeText(requireContext(), "Mật khẩu và xác nhận mật khẩu cần giống nhau", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 mBinding.spinKit.setVisibility(View.VISIBLE);
-                mViewModel.createUser(mBinding.edtAccount.getText().toString(), mBinding.edtPassword.getText().toString(), mBinding.edtConfirm.getText().toString());
+                mViewModel.createUser(mBinding.edtAccount.getText().toString().trim(), mBinding.edtPassword.getText().toString().trim(), mBinding.edtConfirm.getText().toString().trim());
+            }
+        });
+
+        mBinding.btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().onBackPressed();
             }
         });
 
