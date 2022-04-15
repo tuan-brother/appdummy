@@ -146,6 +146,7 @@ public class DetailProductFragment extends Fragment {
             mBinding.spinKit.setVisibility(View.GONE);
             if (aBoolean) {
                 if (getContext() != null) {
+                    requireActivity().onBackPressed();
                     Toast.makeText(getContext(), "Add data success", Toast.LENGTH_SHORT).show();
                 }
             }

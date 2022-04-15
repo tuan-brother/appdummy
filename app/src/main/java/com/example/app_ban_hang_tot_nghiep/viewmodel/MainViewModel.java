@@ -12,6 +12,7 @@ import com.example.app_ban_hang_tot_nghiep.model.Cart;
 import com.example.app_ban_hang_tot_nghiep.model.CartData;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
+import com.example.app_ban_hang_tot_nghiep.model.ResponeBill;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<List<Product>> listData = new MutableLiveData<>();
     public MutableLiveData<List<Product>> listHomeData = new MutableLiveData<>();
     public MutableLiveData<Cart> listCart = new MutableLiveData<>();
+    public MutableLiveData<ResponeBill> listBill = new MutableLiveData<>();
     public List<Product> listSearch = new ArrayList<>();
 
     public void getListCategory() {
@@ -93,14 +95,30 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onResponse(Call<Cart> call, Response<Cart> response) {
                 if (response.isSuccessful()) {
-                    Log.d("TAG444", "onResponse: " + token);
-                    Log.d("TAG444", "onCart:  " + response.body().getProducts().get(0).getProductId());
                     listCart.postValue(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<Cart> call, Throwable t) {
+            }
+        });
+    }
+
+    public void addBillstData(String token) {
+        mApiService = ApiUtils.getApiService();
+
+        mApiService.addBills(token).enqueue(new Callback<ResponeBill>() {
+            @Override
+            public void onResponse(Call<ResponeBill> call, Response<ResponeBill> response) {
+                if (response.isSuccessful()) {
+                    listBill.postValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponeBill> call, Throwable t) {
+
             }
         });
     }

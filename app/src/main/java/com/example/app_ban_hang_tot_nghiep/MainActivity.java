@@ -1,6 +1,7 @@
 package com.example.app_ban_hang_tot_nghiep;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -9,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,9 +46,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+
     public ActivityMainBinding mBinding;
     public MainViewModel mViewModel;
     public ExpandableListAdapter expandableListAdapter;
+    private SharedPreferences mSharedPreferences;
     List<Category> headerList = new ArrayList<>();
     List<String> listDemo = new ArrayList<>();
     HashMap<MenuModel, List<MenuModel>> childList = new HashMap<>();
@@ -60,6 +67,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         addHome();
         setUpSlider();
         populateExpandableList();
+
+        mSharedPreferences = this.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+        String token = mSharedPreferences.getString("tokenID", "xxx");
+        if (!token.equals("xxx")) {
+            mBinding.itemLogin.setVisibility(View.GONE);
+        } else {
+            mBinding.itemLogin.setVisibility(View.VISIBLE);
+        }
 
 //        addNewItem();
         renewItems();
@@ -104,6 +119,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragmentCaterory != null) {
             Log.d("TAG", "onBackPressed:  " + fragmentCaterory);
             getSupportFragmentManager().beginTransaction().remove(fragmentCaterory).commit();
+            return;
+        }
+
+        Fragment fragmentPay = getSupportFragmentManager().findFragmentByTag("pay");
+        if (fragmentPay != null) {
+            Log.d("TAG", "onBackPressed:  " + fragmentPay);
+            getSupportFragmentManager().beginTransaction().remove(fragmentPay).commit();
             return;
         }
 
@@ -167,6 +189,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mBinding.drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+        mBinding.itemLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivityForResult(intent,6677);
+            }
+        });
         mBinding.incController.imgSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -182,6 +211,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 gotoCart();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 6677 && resultCode == 6688) {
+            mBinding.itemLogin.setVisibility(View.GONE);
+        }
     }
 
     private void addHome() {

@@ -88,6 +88,10 @@
                     <include
                         android:id="@+id/information"
                         layout="@layout/item_infordev" />
+
+                    <include
+                        android:id="@+id/itemLogin"
+                        layout="@layout/item_dang_nhap" />
                 </LinearLayout>
             </com.google.android.material.navigation.NavigationView>
 

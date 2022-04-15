@@ -1,14 +1,23 @@
 package com.example.app_ban_hang_tot_nghiep.fragment;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.app_ban_hang_tot_nghiep.LoginActivity;
 import com.example.app_ban_hang_tot_nghiep.R;
+import com.example.app_ban_hang_tot_nghiep.databinding.FragmentPayBinding;
+import com.example.app_ban_hang_tot_nghiep.utils.Utils;
+import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,50 +26,91 @@ import com.example.app_ban_hang_tot_nghiep.R;
  */
 public class PayFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String total = "TOTALBILL";
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    public onBackSuccess onBackSucessListener;
+    private static int totalMoney;
+    public SharedPreferences mSharedPreferences;
+    private MainViewModel mViewModel;
+    static PayFragment payFragment;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentPayBinding mBinding;
 
-    public PayFragment() {
-        // Required empty public constructor
+    // TODO: Rename and change types and number of parameters
+    public static PayFragment newInstance(Integer param1, onBackSuccess onListener) {
+        payFragment = new PayFragment();
+        Bundle args = new Bundle();
+        args.putInt(total, param1);
+        payFragment.setArguments(args);
+        payFragment.setOnclick(onListener);
+        return payFragment;
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PayFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PayFragment newInstance(String param1, String param2) {
-        PayFragment fragment = new PayFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static PayFragment getInstance() {
+        return payFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            totalMoney = getArguments().getInt(total);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mBinding = FragmentPayBinding.inflate(inflater, container, false);
+        mSharedPreferences = requireContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+        mBinding.tvTotalMoney.setText(new Utils().convertMoney(totalMoney));
+        mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
+            mBinding.spinKit.setVisibility(View.GONE);
+            Toast.makeText(requireContext(), "Add bill success", Toast.LENGTH_SHORT).show();
+            if (onBackSucessListener != null) {
+                onBackSucessListener.onSuccess();
+            }
+        });
+        onClick();
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pay, container, false);
+        return mBinding.getRoot();
+    }
+
+    private void onClick() {
+        mBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().onBackPressed();
+            }
+        });
+        mBinding.tvDHOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mSharedPreferences.getString("tokenID", "xxx").equals("xxx")) {
+                    Intent intent = new Intent(requireContext(), LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
+                mBinding.spinKit.setVisibility(View.VISIBLE);
+                String token = mSharedPreferences.getString("tokenID", "xxx");
+                mViewModel.addBillstData(token);
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        onBackSucessListener = null;
+    }
+
+    public void setOnclick(onBackSuccess listener) {
+        this.onBackSucessListener = listener;
+    }
+
+    public interface onBackSuccess {
+        void onSuccess();
     }
 }
