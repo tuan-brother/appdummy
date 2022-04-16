@@ -66,12 +66,13 @@ public class PayFragment extends Fragment {
 
         mBinding = FragmentPayBinding.inflate(inflater, container, false);
         mSharedPreferences = requireContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
-        mBinding.tvTotalMoney.setText(new Utils().convertMoney(totalMoney));
+        mBinding.setShipCost(new Utils().convertMoney(20000));
+        mBinding.setTotalCode(new Utils().convertMoney(totalMoney));
         mPayViewModel = ViewModelProviders.of(this).get(PayViewModel.class);
         mPayViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
             requireActivity().onBackPressed();
             mBinding.spinKit.setVisibility(View.GONE);
-            Toast.makeText(requireContext(), "Add bill success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Tạo hóa đơn thành công", Toast.LENGTH_SHORT).show();
             if (onBackSucessListener != null) {
                 onBackSucessListener.onSuccess();
             }

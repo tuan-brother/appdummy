@@ -31,15 +31,16 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.google.android.material.appbar.AppBarLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/dp_24"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
                     <include
                         android:id="@+id/incController"
                         layout="@layout/item_layout_home_controller" />
-                </com.google.android.material.appbar.AppBarLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.smarteist.autoimageslider.SliderView
                     android:id="@+id/imageSlider"

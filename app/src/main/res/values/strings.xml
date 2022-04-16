@@ -38,7 +38,7 @@
     <string name="name_user">Nhập Tên Người Nhận</string>
     <string name="input_key">Nhập từ khóa</string>
     <string name="total_money">Tổng Tiền</string>
-    <string name="sell">Mua Hàng</string>
+    <string name="sell">Thanh Toán  </string>
     <string name="continue_h">Tiếp Tục Mua Hàng</string>
     <string name="order">Đặt Hàng</string>
     <string name="total_count_money">Tổng tiền</string>
@@ -54,5 +54,8 @@
     //delete item cart
     <string name="delete_item">Bạn có muốn xóa sản phẩm không?</string>
     <string name="delete_item_title">Xóa sản phẩm</string>
+    <string name="count_money_total">Tổng Tiền: </string>
+    <string name="count">Số Lượng</string>
+    <string name="cart_info">Giỏ Hàng</string>
 
 </resources>
