@@ -61,6 +61,6 @@ public interface ApiService {
     @POST("api/bills/add/{address}/{phone}/{email}/{name}")
     Call<ResponeBill> addBills(@Path("address") String address, @Path("phone") String phone, @Path("email") String email, @Path("name") String name, @Field("token") String token);
 
-    @GET("api/bills/get")
-    Call<Cart> getBill(@Field("token") String token);
+    @GET("api/bills/get/{token}")
+    Call<ResponeBill> getBill(@Path("token") String token);
 }

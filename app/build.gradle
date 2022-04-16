@@ -59,6 +59,8 @@ dependencies {
     //circleimage
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
+    implementation 'com.jcminarro:RoundKornerLayouts:0.4.0'
+
     implementation 'io.michaelrocks:libphonenumber-android:8.12.46'
 
     

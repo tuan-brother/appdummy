@@ -31,6 +31,7 @@ import com.example.app_ban_hang_tot_nghiep.fragment.CartFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.CatorogyCommonFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.DetailProductFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.HomeFragment;
+import com.example.app_ban_hang_tot_nghiep.fragment.MyBillFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.SearchFragment;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
 import com.example.app_ban_hang_tot_nghiep.model.MenuModel;
@@ -213,6 +214,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        mBinding.myBills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBinding.drawerLayout.closeDrawers();
+                gotoMyBill();
+            }
+        });
+
         mBinding.itemLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -292,6 +301,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void gotoCart() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.parent_content, new CartFragment(), "cart").commit();
+    }
+
+    public void gotoMyBill() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.parent_content, new MyBillFragment(), "billwaiting").commit();
     }
 
     @Override

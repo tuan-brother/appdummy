@@ -88,6 +88,10 @@
                         android:id="@+id/information"
                         layout="@layout/item_infordev" />
 
+                    <include
+                        android:id="@+id/my_bills"
+                        layout="@layout/item_my_bills" />
+
                     <ExpandableListView
                         android:id="@+id/expandableListView"
                         android:layout_width="match_parent"

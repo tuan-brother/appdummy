@@ -23,10 +23,11 @@
     <string name="food">Đồ Ăn</string>
     <string name="self">Đồ Dùng Cá Nhân</string>
     <string name="info">Thông Tin Cá Nhân</string>
+    <string name="my_bills">Đơn Hàng Của Tôi</string>
     <string name="sing_out">Đăng Xuất</string>
     <string name="main_home">Trang Chủ</string>
     <string name="search">Tìm kiếm</string>
-    <string name="pay_type">Hỉnh thức thanh toán :</string>
+    <string name="pay_type">Hình thức thanh toán :</string>
     <string name="pay_when_receiver">Thanh toán khi nhận hàng</string>
     <string name="note">Ghi chú</string>
     <string name="ship_code">Phí chuyển phát</string>
