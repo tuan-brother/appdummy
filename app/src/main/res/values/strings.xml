@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dang_nhap">Đăng Nhập</string>
+    <string name="dang_xuat">Đăng Xuất</string>
     <string name="forgot_pass">Quên Mật Khẩu</string>
     <string name="ten_tai_khoan">Tên Tài Khoản</string>
     <string name="mat_khau">Mật Khẩu</string>
@@ -44,4 +45,10 @@
     <string name="input_address_email">Nhập Địa Chỉ Email</string>
     <string name="input_personal">Nhập Tên Người Nhận</string>
     <string name="input_phone_number">Nhập Số Điện Thoại</string>
+
+    //
+    <string name="about_log_out">Bạn có muốn đăng xuất không</string>
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+
 </resources>
