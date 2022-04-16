@@ -3,38 +3,30 @@ package com.example.app_ban_hang_tot_nghiep.fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.adapter.CartAdapter;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentCartBinding;
 import com.example.app_ban_hang_tot_nghiep.model.Cart;
 import com.example.app_ban_hang_tot_nghiep.model.ItemCartMoreInfo;
-import com.example.app_ban_hang_tot_nghiep.model.ItemProductCartItem;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
+import com.example.app_ban_hang_tot_nghiep.viewmodel.CartViewModel;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import io.michaelrocks.libphonenumber.android.NumberParseException;
-import io.michaelrocks.libphonenumber.android.PhoneNumberUtil;
-import io.michaelrocks.libphonenumber.android.Phonenumber;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CartFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class CartFragment extends Fragment implements CartAdapter.onItemClick {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -45,10 +37,13 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
 
     private FragmentCartBinding mBinding;
     private MainViewModel mViewModel;
+    private CartViewModel mCartViewModel;
     private CartAdapter mAdapter;
     public List<ItemCartMoreInfo> mListData = new ArrayList<>();
     public Cart mCart;
     static CartFragment sCartFragment;
+    SharedPreferences sharedPreferences;
+    String token;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -86,13 +81,14 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
                              Bundle savedInstanceState) {
         mBinding = FragmentCartBinding.inflate(inflater, container, false);
         mViewModel = new ViewModelProvider(requireActivity()).get(MainViewModel.class);
+        mCartViewModel = ViewModelProviders.of(this).get(CartViewModel.class);
         setUpAdapter();
         mBinding.spinKit.setVisibility(View.VISIBLE);
-        SharedPreferences sharedPreferences = requireContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
-        String token = sharedPreferences.getString("tokenID", "xxx");
+        sharedPreferences = requireContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+        token = sharedPreferences.getString("tokenID", "xxx");
         Log.d("TAG567", "onCreateView: " + token);
-        mViewModel.getListCartData(token);
-        mViewModel.listCart.observe(getViewLifecycleOwner(), cart -> {
+        mCartViewModel.getListCartData(token);
+        mCartViewModel.listCart.observe(getViewLifecycleOwner(), cart -> {
             mCart = cart;
             List<ItemCartMoreInfo> listItem = new ArrayList<>();
             Log.d("TAG444", "onCreateView: " + mViewModel.listSearch.size());
@@ -113,10 +109,21 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
                         }
                     }
                 }
-                mBinding.tvTotalShow.setText(new Utils().convertMoney(cart.getTotal()));
+                Log.d("TAG", "onCreateView: " + cart.getTotal());
+                mBinding.setTotal(new Utils().convertMoney(cart.getTotal()));
                 mListData.clear();
                 mListData.addAll(listItem);
                 mBinding.recycleCart.getAdapter().notifyDataSetChanged();
+            }
+        });
+        mCartViewModel.deleteSuccess.observe(getViewLifecycleOwner(), data -> {
+            mBinding.spinKit.setVisibility(View.GONE);
+            if (data) {
+                Toast.makeText(requireContext(), "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+                Toast.makeText(requireContext(), "Xóa sản phẩm không thành công", Toast.LENGTH_SHORT).show();
+                return;
             }
         });
         onClick();
@@ -129,6 +136,20 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
     @Override
     public void ItemClick(ItemCartMoreInfo items) {
 
+    }
+
+    @Override
+    public void onLongClick(ItemCartMoreInfo items) {
+        new AlertDialog.Builder(requireContext()).setMessage(R.string.delete_item)
+                .setTitle(R.string.delete_item_title)
+                .setPositiveButton(R.string.yes, (arg0, arg1) -> {
+                    mBinding.spinKit.setVisibility(View.VISIBLE);
+                    mCartViewModel.deleteItemCart(items.getProductId(), token);
+                })
+                .setNegativeButton(R.string.no, (arg0, arg1) -> {
+
+                })
+                .show();
     }
 
     public void setUpAdapter() {

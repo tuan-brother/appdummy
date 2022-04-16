@@ -26,7 +26,6 @@ public class MainViewModel extends ViewModel {
     public MutableLiveData<List<Category>> listCate = new MutableLiveData<>();
     public MutableLiveData<List<Product>> listData = new MutableLiveData<>();
     public MutableLiveData<List<Product>> listHomeData = new MutableLiveData<>();
-    public MutableLiveData<Cart> listCart = new MutableLiveData<>();
     public MutableLiveData<ResponeBill> listBill = new MutableLiveData<>();
     public List<Product> listSearch = new ArrayList<>();
 
@@ -84,23 +83,6 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
 
-            }
-        });
-    }
-
-    public void getListCartData(String token) {
-        mApiService = ApiUtils.getApiService();
-
-        mApiService.getCart(token).enqueue(new Callback<Cart>() {
-            @Override
-            public void onResponse(Call<Cart> call, Response<Cart> response) {
-                if (response.isSuccessful()) {
-                    listCart.postValue(response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Cart> call, Throwable t) {
             }
         });
     }

@@ -54,6 +54,10 @@ public interface ApiService {
     Call<Cart> getCart(@Path("token") String tokenUser);
 
     @FormUrlEncoded
+    @POST("api/cart/delete/{productID}")
+    Call<Cart> deleteItem(@Path("productID") String productID, @Field("token") String tokenUser);
+
+    @FormUrlEncoded
     @POST("api/bills/add/{address}/{phone}/{email}/{name}")
     Call<ResponeBill> addBills(@Path("address") String address, @Path("phone") String phone, @Path("email") String email, @Path("name") String name, @Field("token") String token);
 
