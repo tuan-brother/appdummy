@@ -3,6 +3,7 @@ package com.example.app_ban_hang_tot_nghiep;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
@@ -71,9 +72,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mSharedPreferences = this.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         String token = mSharedPreferences.getString("tokenID", "xxx");
         if (!token.equals("xxx")) {
-            mBinding.itemLogin.setVisibility(View.GONE);
+            mBinding.setIsLogin(true);
         } else {
-            mBinding.itemLogin.setVisibility(View.VISIBLE);
+            mBinding.setIsLogin(false);
         }
 
 //        addNewItem();
@@ -179,6 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBinding.information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mBinding.drawerLayout.closeDrawers();
                 Intent intent = new Intent(view.getContext(), InforDevActivity.class);
                 startActivity(intent);
             }
@@ -192,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBinding.itemLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mBinding.drawerLayout.closeDrawers();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivityForResult(intent, 6677);
             }
@@ -201,6 +204,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 mBinding.drawerLayout.closeDrawers();
                 gotoSearch();
+            }
+        });
+
+        mBinding.itemLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBinding.drawerLayout.closeDrawers();
+                new AlertDialog.Builder(MainActivity.this).setMessage(R.string.about_log_out)
+                        .setTitle(R.string.dang_xuat)
+                        .setPositiveButton(R.string.yes, (arg0, arg1) -> {
+                            removeData();
+                            Toast.makeText(MainActivity.this, "Logout success", Toast.LENGTH_SHORT).show();
+                            mBinding.setIsLogin(false);
+                        })
+                        .setNegativeButton(R.string.no, (arg0, arg1) -> {
+
+                        })
+                        .show();
             }
         });
 
@@ -217,8 +238,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d("TAG", "onActivityResult: " + requestCode + "--" + resultCode);
-        if (requestCode == 6677 && resultCode == 6688) {
-            mBinding.itemLogin.setVisibility(View.GONE);
+        if (resultCode == 6688) {
+            mBinding.setIsLogin(true);
         }
     }
 
@@ -270,5 +291,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    private void removeData() {
+        mSharedPreferences.edit().remove("tokenID").apply();
     }
 }
