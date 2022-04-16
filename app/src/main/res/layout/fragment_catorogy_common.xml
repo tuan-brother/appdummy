@@ -6,13 +6,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ff0">
+        android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/viewController"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_24"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:layout_constraintTop_toTopOf="parent"
             tools:context=".fragment.CatorogyCommonFragment">
 
@@ -32,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/main_color"
-                android:textSize="18sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/imgBack"
                 app:layout_constraintEnd_toStartOf="@id/imgBackHome"
@@ -52,6 +53,13 @@
                 app:layout_constraintTop_toTopOf="@id/imgBack" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/viewDivide"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="#6C6B6C"
+            app:layout_constraintTop_toBottomOf="@id/viewController" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleProduct"
