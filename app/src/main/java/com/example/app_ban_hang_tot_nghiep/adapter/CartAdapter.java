@@ -49,6 +49,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 onClick.ItemClick(data);
             }
         });
+        holder.mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                onClick.onLongClick(data);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -69,15 +76,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         }
 
         public void onBind(ItemCartMoreInfo items) {
-            mBinding.setPrices(items.getPrice()+"");
+            mBinding.setPrices(items.getPrice() + "");
             mBinding.setUrlImage(items.getImage());
             mBinding.setTitle(items.getProductName());
-            mBinding.setDes(items.getAmount()+"");
+            mBinding.setDes(items.getAmount() + "");
 //            mBinding.setUrlImage(items.getImage().get(0));
         }
     }
 
     public interface onItemClick {
         public void ItemClick(ItemCartMoreInfo items);
+
+        public void onLongClick(ItemCartMoreInfo items);
     }
 }

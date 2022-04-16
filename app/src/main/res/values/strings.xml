@@ -47,8 +47,12 @@
     <string name="input_phone_number">Nhập Số Điện Thoại</string>
 
     //
-    <string name="about_log_out">Bạn có muốn đăng xuất không</string>
+    <string name="about_log_out">Bạn có muốn đăng xuất không?</string>
     <string name="yes">Có</string>
     <string name="no">Không</string>
+
+    //delete item cart
+    <string name="delete_item">Bạn có muốn xóa sản phẩm không?</string>
+    <string name="delete_item_title">Xóa sản phẩm</string>
 
 </resources>
