@@ -71,7 +71,6 @@ public class InforUserActivity extends AppCompatActivity {
         mViewModel = ViewModelProviders.of(this).get(UserInfoViewModel.class);
         mViewModel.getUser(token);
         mViewModel.userInfor.observe(this, data -> {
-            Toast.makeText(InforUserActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
             mBinding.spinKit.setVisibility(View.GONE);
             mBinding.setImgUrl(data.getAvatar());
             mBinding.setEdtAdress(data.getAddress());
