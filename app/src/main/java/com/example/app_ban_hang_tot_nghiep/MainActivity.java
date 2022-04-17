@@ -2,7 +2,6 @@ package com.example.app_ban_hang_tot_nghiep;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -24,20 +23,16 @@ import android.widget.ExpandableListView;
 import android.widget.Toast;
 
 import com.example.app_ban_hang_tot_nghiep.adapter.ExpandableListAdapter;
-import com.example.app_ban_hang_tot_nghiep.adapter.HomeAdapter;
 import com.example.app_ban_hang_tot_nghiep.adapter.SliderAdapterExample;
 import com.example.app_ban_hang_tot_nghiep.databinding.ActivityMainBinding;
 import com.example.app_ban_hang_tot_nghiep.fragment.CartFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.CatorogyCommonFragment;
-import com.example.app_ban_hang_tot_nghiep.fragment.DetailProductFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.HomeFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.MyBillFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.SearchFragment;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
 import com.example.app_ban_hang_tot_nghiep.model.MenuModel;
-import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.model.SliderItem;
-import com.example.app_ban_hang_tot_nghiep.view.decor.GridSpacingItemDecoration;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 import com.google.android.material.navigation.NavigationView;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -96,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, new HomeFragment()).commit();
         } else if (id == R.id.information) {
-            Intent intent = new Intent(this, InforDevActivity.class);
+            Intent intent = new Intent(this, InforUserActivity.class);
             startActivity(intent);
         } else {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -195,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
                 mBinding.drawerLayout.closeDrawers();
-                Intent intent = new Intent(view.getContext(), InforDevActivity.class);
+                Intent intent = new Intent(view.getContext(), InforUserActivity.class);
                 startActivity(intent);
             }
         });
