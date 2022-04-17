@@ -77,6 +77,18 @@ public class PayFragment extends Fragment {
                 onBackSucessListener.onSuccess();
             }
         });
+        mPayViewModel.isAddSuccess.observe(getViewLifecycleOwner(), data -> {
+            mBinding.spinKit.setVisibility(View.GONE);
+            if (data) {
+                requireActivity().onBackPressed();
+                Toast.makeText(requireContext(), "Tạo hóa đơn thành công", Toast.LENGTH_SHORT).show();
+                if (onBackSucessListener != null) {
+                    onBackSucessListener.onSuccess();
+                }
+            } else {
+                Toast.makeText(requireContext(), "Tạo hóa đơn không thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
         onClick();
         // Inflate the layout for this fragment
         return mBinding.getRoot();

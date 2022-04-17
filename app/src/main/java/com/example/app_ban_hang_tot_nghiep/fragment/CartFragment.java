@@ -41,6 +41,7 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
     private CartAdapter mAdapter;
     public List<ItemCartMoreInfo> mListData = new ArrayList<>();
     public Cart mCart;
+    public int totalMoney = 0;
     static CartFragment sCartFragment;
     SharedPreferences sharedPreferences;
     String token;
@@ -110,6 +111,7 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
                     }
                 }
                 Log.d("TAG", "onCreateView: " + cart.getTotal());
+                totalMoney = cart.getTotal();
                 mBinding.setTotal(new Utils().convertMoney(cart.getTotal()));
                 mListData.clear();
                 mListData.addAll(listItem);
@@ -167,6 +169,10 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
         mBinding.tvBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (totalMoney <= 0) {
+                    Toast.makeText(requireContext(), "Không có sản phẩm nào trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 goToPay();
             }
         });

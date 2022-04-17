@@ -31,6 +31,7 @@ import com.example.app_ban_hang_tot_nghiep.fragment.CartFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.CatorogyCommonFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.DetailProductFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.HomeFragment;
+import com.example.app_ban_hang_tot_nghiep.fragment.MyBillFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.SearchFragment;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
 import com.example.app_ban_hang_tot_nghiep.model.MenuModel;
@@ -122,6 +123,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().remove(fragmentSearch).commit();
             return;
         }
+
+        Fragment fragmentBill = getSupportFragmentManager().findFragmentByTag("billwaiting");
+        if (fragmentBill != null) {
+            getSupportFragmentManager().beginTransaction().remove(fragmentBill).commit();
+            return;
+        }
+
         Fragment fragmentCaterory = getSupportFragmentManager().findFragmentByTag("catetory");
         if (fragmentCaterory != null) {
             Log.d("TAG", "onBackPressed:  " + fragmentCaterory);
@@ -213,6 +221,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
 
+        mBinding.myBills.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBinding.drawerLayout.closeDrawers();
+                gotoMyBill();
+            }
+        });
+
         mBinding.itemLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -280,7 +296,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //            sliderItemList.add(sliderItem);
 //        }
-        sliderItemList.add(new SliderItem("Slider Item", "https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"));
+        sliderItemList.add(new SliderItem("Một số hình ảnh về cửa hàng", "https://cms.luatvietnam.vn/uploaded/Images/Original/2020/03/27/co-so-kinh-doanh-duoc-mo-cua_2703224203.jpg"));
+        sliderItemList.add(new SliderItem("Một số hình ảnh về cửa hàng", "https://sobanhang.com/wp-content/uploads/2021/05/tap-hoa.jpg"));
+        sliderItemList.add(new SliderItem("Một số hình ảnh về cửa hàng", "https://cdn-www.vinid.net/2020/08/5388aae8-shutterstock_515335339-1.jpg"));
         adapter.renewItems(sliderItemList);
     }
 
@@ -292,6 +310,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void gotoCart() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.parent_content, new CartFragment(), "cart").commit();
+    }
+
+    public void gotoMyBill() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.parent_content, new MyBillFragment(), "billwaiting").commit();
     }
 
     @Override

@@ -88,6 +88,11 @@
                         android:id="@+id/information"
                         layout="@layout/item_infordev" />
 
+                    <include
+                        android:id="@+id/my_bills"
+                        layout="@layout/item_my_bills"
+                        android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
+
                     <ExpandableListView
                         android:id="@+id/expandableListView"
                         android:layout_width="match_parent"

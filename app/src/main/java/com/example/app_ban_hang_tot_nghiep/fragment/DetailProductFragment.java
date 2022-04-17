@@ -145,11 +145,12 @@ public class DetailProductFragment extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(DetailViewModel.class);
         mViewModel.listData.observe(getViewLifecycleOwner(), aBoolean -> {
             mBinding.spinKit.setVisibility(View.GONE);
+            Log.d("TAG", "setUpViewModel: " + aBoolean);
             if (aBoolean) {
-                if (getContext() != null) {
-                    requireActivity().onBackPressed();
-                    Toast.makeText(getContext(), "Add data success", Toast.LENGTH_SHORT).show();
-                }
+                requireActivity().onBackPressed();
+                Toast.makeText(getContext(), "Thêm sản phẩm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Thêm sản phẩm vào giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -18,7 +18,7 @@ public class ResponeBill{
 	private String verifier;
 	private Object transporter;
 	private int V;
-	private String id;
+	private String _id;
 	private String username;
 
 	public String getDate(){
@@ -82,7 +82,7 @@ public class ResponeBill{
 	}
 
 	public String getId(){
-		return id;
+		return _id;
 	}
 
 	public String getUsername(){
