@@ -15,15 +15,16 @@ import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.model.ResponeBill;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
-    private ResponeBill mListBill;
+    private List<ResponeBill> mListBill = new ArrayList<>();
     private Context mContext;
 
     private BillAdapter.onItemCategoryClick onClick;
 
-    public BillAdapter(ResponeBill listBill, Context mContext, BillAdapter.onItemCategoryClick onClick) {
+    public BillAdapter(List<ResponeBill> listBill, Context mContext, BillAdapter.onItemCategoryClick onClick) {
         this.mListBill = listBill;
         this.mContext = mContext;
         this.onClick = onClick;
@@ -41,14 +42,21 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ResponeBill data = mListBill;
-        Log.d("TAG555", "onBindViewHolder:  " + mListBill.getFeedback() + mListBill.getDate());
+        ResponeBill data = mListBill.get(position);
         holder.onBind(data);
+        holder.mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                onClick.itemLongClickListener(data);
+                return false;
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return mListBill == null ? 0 : mListBill.size();
+
     }
 
     /**
@@ -64,14 +72,15 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         }
 
         public void onBind(ResponeBill items) {
-            Log.d("TAG555", "onBind: " + items.getDate() + "" + items.getFeedback());
             mBinding.setBillCodes(items.getId() + "");
-            mBinding.setTotalMoney(items.getTotal() + "");
-            mBinding.setStatus("đang chờ xác nhận");
+            mBinding.setTotalMoney(new Utils().convertMoney(items.getTotal()));
+            mBinding.setDate(items.getDate());
         }
     }
 
     public interface onItemCategoryClick {
         public void ItemClick(Product items);
+
+        public void itemLongClickListener(ResponeBill items);
     }
 }

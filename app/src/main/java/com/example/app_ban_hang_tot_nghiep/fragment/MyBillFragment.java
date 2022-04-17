@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.adapter.BillAdapter;
@@ -32,7 +34,7 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
     private BillAdapter mAdapter;
     SharedPreferences sharedPreferences;
     String token;
-    public ResponeBill mBill = new ResponeBill();
+    public List<ResponeBill> listData = new ArrayList<>();
 
     // TODO: Rename and change types and number of parameters
     public static MyBillFragment newInstance(String param1, String param2) {
@@ -54,16 +56,10 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
                              Bundle savedInstanceState) {
 
         mBinding = FragmentMyBillBinding.inflate(inflater, container, false);
-        mViewModel = ViewModelProviders.of(this).get(BillWaitingViewModel.class);
-        setUpAdapter();
         sharedPreferences = requireContext().getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         token = sharedPreferences.getString("tokenID", "xxx");
-        mViewModel.getListCartData(token);
-        mViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
-            Log.d("TAG", "bill:  " + data.getDate());
-            mBill = data;
-            mBinding.recycleBill.getAdapter().notifyDataSetChanged();
-        });
+        setUpAdapter();
+        setUpViewModel();
         // Inflate the layout for this fragment
         return mBinding.getRoot();
     }
@@ -73,8 +69,53 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
 
     }
 
+    @Override
+    public void itemLongClickListener(ResponeBill items) {
+        new AlertDialog.Builder(requireContext()).setMessage(R.string.delete_bill)
+                .setTitle(R.string.delete_bill_title)
+                .setPositiveButton(R.string.yes, (arg0, arg1) -> {
+//                    mBinding.spinKit.setVisibility(View.VISIBLE);
+                    mViewModel.deleteListBill(items.getId(), token);
+                })
+                .setNegativeButton(R.string.no, (arg0, arg1) -> {
+
+                })
+                .show();
+    }
+
+    private void setUpViewModel() {
+        mViewModel = ViewModelProviders.of(this).get(BillWaitingViewModel.class);
+        mViewModel.getListCartData(token);
+        mViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
+            listData.clear();
+            listData.addAll(data);
+            mBinding.recycleBill.getAdapter().notifyDataSetChanged();
+        });
+        mViewModel.deleteSuccess.observe(getViewLifecycleOwner(), data -> {
+            if (data) {
+                Toast.makeText(requireContext(), "Xóa hóa đơn thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(requireContext(), "Xóa hóa đơn thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+        onClick();
+    }
+
     public void setUpAdapter() {
-        mAdapter = new BillAdapter(mBill, requireContext(), this);
+        mAdapter = new BillAdapter(listData, requireContext(), this);
         mBinding.recycleBill.setAdapter(mAdapter);
+    }
+
+    public void onClick() {
+        mBinding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                requireActivity().onBackPressed();
+            }
+        });
+    }
+
+    public void showDialog() {
+
     }
 }

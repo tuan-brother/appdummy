@@ -123,6 +123,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getSupportFragmentManager().beginTransaction().remove(fragmentSearch).commit();
             return;
         }
+
+        Fragment fragmentBill = getSupportFragmentManager().findFragmentByTag("billwaiting");
+        if (fragmentBill != null) {
+            getSupportFragmentManager().beginTransaction().remove(fragmentBill).commit();
+            return;
+        }
+
         Fragment fragmentCaterory = getSupportFragmentManager().findFragmentByTag("catetory");
         if (fragmentCaterory != null) {
             Log.d("TAG", "onBackPressed:  " + fragmentCaterory);
@@ -289,7 +296,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //            sliderItemList.add(sliderItem);
 //        }
-        sliderItemList.add(new SliderItem("Slider Item", "https://images.pexels.com/photos/929778/pexels-photo-929778.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"));
+        sliderItemList.add(new SliderItem("Một số hình ảnh về cửa hàng", "https://cms.luatvietnam.vn/uploaded/Images/Original/2020/03/27/co-so-kinh-doanh-duoc-mo-cua_2703224203.jpg"));
+        sliderItemList.add(new SliderItem("Một số hình ảnh về cửa hàng", "https://sobanhang.com/wp-content/uploads/2021/05/tap-hoa.jpg"));
+        sliderItemList.add(new SliderItem("Một số hình ảnh về cửa hàng", "https://cdn-www.vinid.net/2020/08/5388aae8-shutterstock_515335339-1.jpg"));
         adapter.renewItems(sliderItemList);
     }
 

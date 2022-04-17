@@ -15,6 +15,7 @@
     <string name="navigation_open">Open</string>
     <string name="navigation_close">Close</string>
     <string name="detail_product">Chi Tiết Sản Phẩm</string>
+    <string name="my_bill">Đơn Đặt Hàng</string>
     <string name="pay">Thanh Toán</string>
 
     //menu
@@ -58,5 +59,10 @@
     <string name="count_money_total">Tổng Tiền: </string>
     <string name="count">Số Lượng</string>
     <string name="cart_info">Giỏ Hàng</string>
+    <string name="date">Date :</string>
+
+    //delete item bill
+    <string name="delete_bill">Bạn có muốn xóa đơn hàng không?</string>
+    <string name="delete_bill_title">Xóa đơn hàng</string>
 
 </resources>

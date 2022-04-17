@@ -90,7 +90,8 @@
 
                     <include
                         android:id="@+id/my_bills"
-                        layout="@layout/item_my_bills" />
+                        layout="@layout/item_my_bills"
+                        android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
 
                     <ExpandableListView
                         android:id="@+id/expandableListView"

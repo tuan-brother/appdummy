@@ -14,7 +14,7 @@
             type="String" />
 
         <variable
-            name="status"
+            name="date"
             type="String" />
     </data>
 
@@ -22,13 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_150"
         android:layout_margin="@dimen/dp_16"
-        android:background="#ff09"
+        android:background="#FF5722"
         app:corner_radius="@dimen/dp_16"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="@dimen/dp_16">
 
             <TextView
@@ -36,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mã đơn hàng: "
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +46,8 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="@{billCodes}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/tvCode"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvCode"
@@ -55,16 +58,20 @@
                 android:id="@+id/tvTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tổng tiền: "
+                android:text="@string/total_count_money"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCode" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="@{totalMoney}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/tvTotal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvTotal"
@@ -75,7 +82,8 @@
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Status : "
+                android:text="@string/date"
+                android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTotal" />
 
@@ -84,7 +92,9 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="@{status}"
+                android:text="@{date}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/tvStatus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvStatus"
