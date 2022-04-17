@@ -7,9 +7,12 @@ import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.model.ResponeBill;
 import com.example.app_ban_hang_tot_nghiep.model.Token;
 import com.example.app_ban_hang_tot_nghiep.model.UserInfo;
+import com.example.app_ban_hang_tot_nghiep.model.UserRespone;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -67,4 +70,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("api/bills/cancel")
     Call<String> deleteBill(@Field("bill_id") String billID, @Field("token") String token);
+
+    @GET("api/users/{token}")
+    Call<UserRespone> getUser(@Path("token") String token);
+
+    @Multipart
+    @POST("api/users/update/info")
+    Call<UserRespone> updateInforUser(@Part MultipartBody.Part stringAvatar,
+                                      @Part("address") RequestBody address,
+                                      @Part("name") RequestBody name,
+                                      @Part("phone") RequestBody phone,
+                                      @Part("token") RequestBody token);
 }

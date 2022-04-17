@@ -64,5 +64,9 @@
     //delete item bill
     <string name="delete_bill">Bạn có muốn xóa đơn hàng không?</string>
     <string name="delete_bill_title">Xóa đơn hàng</string>
+    <string name="update_info">Update thông tin</string>
+
+    //User
+    <string name="infor_user">Thông tin người dùng</string>
 
 </resources>

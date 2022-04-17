@@ -86,7 +86,8 @@
 
                     <include
                         android:id="@+id/information"
-                        layout="@layout/item_infordev" />
+                        layout="@layout/item_infordev"
+                        android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
 
                     <include
                         android:id="@+id/my_bills"
