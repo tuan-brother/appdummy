@@ -30,11 +30,14 @@
 
             <TextView
                 android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textColor="@color/main_color"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:textSize="25sp"
-                android:textStyle="bold"
+                android:gravity="center"
+                android:fontFamily="@font/open_bold"
                 app:layout_constraintBottom_toBottomOf="@id/imgBack"
                 app:layout_constraintEnd_toStartOf="@id/imgBackHome"
                 app:layout_constraintStart_toEndOf="@id/imgBack"

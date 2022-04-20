@@ -65,8 +65,9 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
     }
 
     @Override
-    public void ItemClick(Product items) {
-
+    public void ItemClick(ResponeBill items) {
+        BottomSheetFragment bottomSheetFragment = BottomSheetFragment.newInstance(items);
+        bottomSheetFragment.show(getParentFragmentManager(), bottomSheetFragment.getTag());
     }
 
     @Override

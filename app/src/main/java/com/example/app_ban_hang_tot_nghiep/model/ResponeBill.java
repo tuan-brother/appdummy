@@ -1,8 +1,9 @@
 package com.example.app_ban_hang_tot_nghiep.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ResponeBill{
+public class ResponeBill implements Serializable {
 	private String date;
 	private boolean transporting;
 	private String finishAt;

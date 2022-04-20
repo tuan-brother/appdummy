@@ -13,6 +13,7 @@
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/activity_welcome.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_catorogy_common.xml" value="0.2" />
+        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_change_pass.xml" value="0.264" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_detail_product.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_forgot_password.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/fragment_home.xml" value="0.25" />
@@ -37,6 +38,8 @@
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_menu.xml" value="0.152" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_my_bills.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/item_view_pager.xml" value="0.25" />
+        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/layout_charge_password.xml" value="0.2" />
+        <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/layout_detail_bill.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/layout_header_navigation.xml" value="0.25" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/list_group_child.xml" value="0.12291666666666666" />
         <entry key="..\:/App_Ban_Hang_Tot_Nghiep/app/src/main/res/layout/list_groups.xml" value="0.25" />

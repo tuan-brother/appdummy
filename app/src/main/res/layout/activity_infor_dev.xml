@@ -50,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/infor_user"
                 android:textColor="@color/main_color"
+                android:fontFamily="@font/open_bold"
                 android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/imgBack"

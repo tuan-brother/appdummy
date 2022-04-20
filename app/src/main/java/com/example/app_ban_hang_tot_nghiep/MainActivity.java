@@ -27,6 +27,7 @@ import com.example.app_ban_hang_tot_nghiep.adapter.SliderAdapterExample;
 import com.example.app_ban_hang_tot_nghiep.databinding.ActivityMainBinding;
 import com.example.app_ban_hang_tot_nghiep.fragment.CartFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.CatorogyCommonFragment;
+import com.example.app_ban_hang_tot_nghiep.fragment.ChangePassFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.HomeFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.MyBillFragment;
 import com.example.app_ban_hang_tot_nghiep.fragment.SearchFragment;
@@ -139,6 +140,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return;
         }
 
+        Fragment fragmentChange = getSupportFragmentManager().findFragmentByTag("changepass");
+        if (fragmentChange != null) {
+            Log.d("TAG", "onBackPressed:  " + fragmentChange);
+            getSupportFragmentManager().beginTransaction().remove(fragmentChange).commit();
+            return;
+        }
+
         Fragment fragmentCart = getSupportFragmentManager().findFragmentByTag("cart");
         if (fragmentCart != null) {
             Log.d("TAG", "onBackPressed:  " + fragmentCart);
@@ -221,6 +229,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View view) {
                 mBinding.drawerLayout.closeDrawers();
                 gotoMyBill();
+            }
+        });
+
+        mBinding.itemChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoChangePass();
             }
         });
 
@@ -310,6 +325,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void gotoMyBill() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.parent_content, new MyBillFragment(), "billwaiting").commit();
+    }
+
+    public void gotoChangePass() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.parent_content, new ChangePassFragment(), "changepass").commit();
     }
 
     @Override
