@@ -3,6 +3,7 @@ package com.example.app_ban_hang_tot_nghiep.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -18,10 +19,15 @@ import android.widget.Toast;
 import com.example.app_ban_hang_tot_nghiep.LoginActivity;
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.adapter.CartAdapter;
+import com.example.app_ban_hang_tot_nghiep.adapter.SliderAdapterExample;
 import com.example.app_ban_hang_tot_nghiep.adapter.ViewPagerAdapter;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentDetailProductBinding;
+import com.example.app_ban_hang_tot_nghiep.model.SliderItem;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.DetailViewModel;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -33,7 +39,7 @@ public class DetailProductFragment extends Fragment {
     public FragmentDetailProductBinding mBinding;
     public SharedPreferences mSharedPreferences;
     public DetailViewModel mViewModel;
-    private ViewPagerAdapter mAdapter;
+    private SliderAdapterExample adapter;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     private static final String ARG_PARAM1 = "id";
     private static final String ARG_PARAM6 = "name";
@@ -90,11 +96,13 @@ public class DetailProductFragment extends Fragment {
         mBinding.setPrices(new Utils().convertMoney(prices));
         mBinding.setPricesInt(prices);
         mBinding.setCountItem(1);
+        setUpSlider();
         onClick();
         setUpViewModel();
+        renewItems();
 //        int[] images = {R.drawable.anhtest, R.drawable.anhtest, R.drawable.anhtest, R.drawable.anhtest};
-        mAdapter = new ViewPagerAdapter(getContext(), mListImage);
-        mBinding.vpSlide.setAdapter(mAdapter);
+//        mAdapter = new ViewPagerAdapter(getContext(), mListImage);
+//        mBinding.vpSlide.setAdapter(mAdapter);
         // Inflate the layout for this fragment
         return mBinding.getRoot();
     }
@@ -153,5 +161,27 @@ public class DetailProductFragment extends Fragment {
                 Toast.makeText(getContext(), "Thêm sản phẩm vào giỏ hàng thất bại", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void setUpSlider() {
+        adapter = new SliderAdapterExample(requireContext());
+        mBinding.vpSlide.setSliderAdapter(adapter);
+        mBinding.vpSlide.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        mBinding.vpSlide.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        mBinding.vpSlide.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        mBinding.vpSlide.setIndicatorSelectedColor(Color.WHITE);
+        mBinding.vpSlide.setIndicatorUnselectedColor(Color.GRAY);
+        mBinding.vpSlide.setScrollTimeInSec(3);
+        mBinding.vpSlide.setAutoCycle(true);
+        mBinding.vpSlide.startAutoCycle();
+    }
+
+    public void renewItems() {
+        List<SliderItem> sliderItemList = new ArrayList<>();
+
+        for (int i = 0; i < mListImage.size(); i++) {
+            sliderItemList.add(new SliderItem("", mListImage.get(i)));
+        }
+        adapter.renewItems(sliderItemList);
     }
 }

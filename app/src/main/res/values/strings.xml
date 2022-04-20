@@ -4,6 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dang_nhap">Đăng Nhập</string>
     <string name="dang_xuat">Đăng Xuất</string>
+    <string name="change_pass">Đổi Mật Khẩu</string>
     <string name="forgot_pass">Quên Mật Khẩu</string>
     <string name="ten_tai_khoan">Tên Tài Khoản</string>
     <string name="mat_khau">Mật Khẩu</string>
@@ -68,5 +69,13 @@
 
     //User
     <string name="infor_user">Thông tin người dùng</string>
+    <string name="add_to_cart">Thêm Vào giỏ hàng</string>
+    <string name="address_revice">Nhập Địa chỉ giao hàng</string>
+    <string name="detail_bill">Chi Tiết Đơn Hàng</string>
+    <string name="description">Mô tả</string>
+    <string name="price_product">Giá</string>
+    <string name="old_pass">Mật Khẩu Cũ</string>
+    <string name="new_pass">Mật Khẩu Mới</string>
+    <string name="change">Thay Đổi Mật Khẩu</string>
 
 </resources>

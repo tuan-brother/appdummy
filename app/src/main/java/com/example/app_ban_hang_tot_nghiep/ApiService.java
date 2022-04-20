@@ -37,6 +37,10 @@ public interface ApiService {
     Call<String> forgotPass(@Field("email") String email);
 
     @FormUrlEncoded
+    @POST("api/users/change/password")
+    Call<String> changePass(@Field("token") String token, @Field("oldPassword") String oldPass, @Field("newPass") String newPass);
+
+    @FormUrlEncoded
     @POST("api/users/create")
     Call<UserInfo> createInf(@Field("email") String email, @Field("password") String password, @Field("repassword") String repassword);
 

@@ -44,6 +44,12 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ResponeBill data = mListBill.get(position);
         holder.onBind(data);
+        holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick.ItemClick(data);
+            }
+        });
         holder.mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -79,7 +85,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     }
 
     public interface onItemCategoryClick {
-        public void ItemClick(Product items);
+        public void ItemClick(ResponeBill items);
 
         public void itemLongClickListener(ResponeBill items);
     }
