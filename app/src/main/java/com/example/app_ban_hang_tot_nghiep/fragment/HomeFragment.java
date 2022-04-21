@@ -24,6 +24,8 @@ import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.farahani.spaceitemdecoration.SpaceItemDecoration;
+
 public class HomeFragment extends Fragment implements HomeAdapter.onItemClick {
 
     public MainViewModel mViewModel;
@@ -61,11 +63,11 @@ public class HomeFragment extends Fragment implements HomeAdapter.onItemClick {
 
     public void setUpAdapter() {
         int spanCount = 2; // 3 columns
-        int spacing = 50; // 50px
+        int spacing = 30; // 50px
         boolean includeEdge = true;
         mHomeAdapter = new HomeAdapter(mProductList, getContext(), this);
         mBinding.recycleHome.setAdapter(mHomeAdapter);
-        mBinding.recycleHome.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+        mBinding.recycleHome.addItemDecoration(new SpaceItemDecoration(spacing, includeEdge));
     }
 
     @Override

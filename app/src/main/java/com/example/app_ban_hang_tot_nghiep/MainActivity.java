@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         this.getWindow().setStatusBarColor(Color.TRANSPARENT);
         setUpViewModel();
@@ -109,6 +109,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return;
         }
 
+        Fragment fragmentChange = getSupportFragmentManager().findFragmentByTag("changepass");
+        if (fragmentChange != null) {
+            Log.d("TAG", "onBackPressed:  " + fragmentChange);
+            getSupportFragmentManager().beginTransaction().remove(fragmentChange).commit();
+            return;
+        }
+
         Fragment fragmentManager = getSupportFragmentManager().findFragmentByTag("preview");
         if (fragmentManager != null) {
             getSupportFragmentManager().beginTransaction().remove(fragmentManager).commit();
@@ -137,13 +144,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (fragmentPay != null) {
             Log.d("TAG", "onBackPressed:  " + fragmentPay);
             getSupportFragmentManager().beginTransaction().remove(fragmentPay).commit();
-            return;
-        }
-
-        Fragment fragmentChange = getSupportFragmentManager().findFragmentByTag("changepass");
-        if (fragmentChange != null) {
-            Log.d("TAG", "onBackPressed:  " + fragmentChange);
-            getSupportFragmentManager().beginTransaction().remove(fragmentChange).commit();
             return;
         }
 

@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white_60">#99FFFFFF</color>
     <color name="main_color">#bd2808</color>
+    <color name="neutral_7">#F4F5F6</color>
+    <color name="stoke_edittext_edit_info">#666AB7CE</color>
 </resources>

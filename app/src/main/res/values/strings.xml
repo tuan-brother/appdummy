@@ -44,7 +44,7 @@
     <string name="sell">Thanh Toán  </string>
     <string name="continue_h">Tiếp Tục Mua Hàng</string>
     <string name="order">Đặt Hàng</string>
-    <string name="total_count_money">Tổng tiền</string>
+    <string name="total_count_money">Tổng tiền: </string>
     <string name="input_address_email">Nhập Địa Chỉ Email</string>
     <string name="input_personal">Nhập Tên Người Nhận</string>
     <string name="input_phone_number">Nhập Số Điện Thoại</string>
@@ -60,7 +60,7 @@
     <string name="count_money_total">Tổng Tiền: </string>
     <string name="count">Số Lượng</string>
     <string name="cart_info">Giỏ Hàng</string>
-    <string name="date">Date :</string>
+    <string name="date">Date: </string>
 
     //delete item bill
     <string name="delete_bill">Bạn có muốn xóa đơn hàng không?</string>
@@ -77,5 +77,8 @@
     <string name="old_pass">Mật Khẩu Cũ</string>
     <string name="new_pass">Mật Khẩu Mới</string>
     <string name="change">Thay Đổi Mật Khẩu</string>
+    <string name="address">Địa chỉ</string>
+    <string name="codebill">Mã đơn hàng: </string>
+    <string name="reciver_success">Đã nhận được hàng</string>
 
 </resources>

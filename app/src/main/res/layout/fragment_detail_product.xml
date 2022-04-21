@@ -100,8 +100,8 @@
 
             <com.smarteist.autoimageslider.SliderView
                 android:id="@+id/vpSlide"
-                android:layout_width="@dimen/dp_150"
-                android:layout_height="@dimen/dp_120"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_200"
                 android:layout_marginTop="@dimen/dp_15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -132,8 +132,8 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@id/tvPr"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/vpSlide"
-                app:layout_constraintTop_toTopOf="@id/vpSlide"
+                app:layout_constraintStart_toStartOf="@id/vpSlide"
+                app:layout_constraintTop_toBottomOf="@id/vpSlide"
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
@@ -141,6 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/price_product"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@id/tvD"
                 app:layout_constraintStart_toStartOf="@id/tvTitle"
                 app:layout_constraintTop_toBottomOf="@id/tvTitle"
@@ -153,6 +154,7 @@
                 android:fontFamily="@font/robotoregular"
                 android:gravity="center"
                 android:text="@{prices}"
+                android:textSize="20sp"
                 android:textColor="@color/main_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvPr"
@@ -163,6 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/description"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tvPr"
                 app:layout_constraintTop_toBottomOf="@id/tvPr"
@@ -175,6 +178,7 @@
                 android:fontFamily="@font/robotoregular"
                 android:text="@{description}"
                 android:gravity="center"
+                android:textSize="20sp"
                 android:textColor="@color/main_color"
                 app:layout_constraintStart_toEndOf="@id/tvD"
                 app:layout_constraintEnd_toEndOf="parent"

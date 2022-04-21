@@ -35,16 +35,20 @@
                 android:id="@+id/tvCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mã đơn hàng: "
+                android:text="@string/codebill"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/tvTotal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
+                android:layout_marginStart="@dimen/dp_12"
+                android:maxLength="6"
                 android:text="@{billCodes}"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -60,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/total_count_money"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@id/tvStatus"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCode" />
 
@@ -84,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/date"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTotal" />
 
@@ -93,6 +99,7 @@
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="@{date}"
+                android:layout_marginStart="@dimen/dp_12"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/tvStatus"
