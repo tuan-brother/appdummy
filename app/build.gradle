@@ -63,5 +63,7 @@ dependencies {
 
     implementation 'io.michaelrocks:libphonenumber-android:8.12.46'
 
+    implementation 'me.farahani.spaceitemdecoration:spaceitemdecoration:1.0'
+
     
 }

@@ -98,31 +98,35 @@
                     android:layout_height="@dimen/dp_60"
                     android:layout_marginStart="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:layout_marginEnd="@dimen/dp_20"
-                    android:background="@color/main_color">
+                    android:layout_marginEnd="@dimen/dp_20">
 
-                    <ImageView
-                        android:id="@+id/imgLocation"
+                    <TextView
+                        android:id="@+id/tvName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
-                        android:src="@drawable/ic_location"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="@string/address"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/edtLocation"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/edtLocation" />
 
                     <EditText
                         android:id="@+id/edtLocation"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/address_revice"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@id/imgLocation"
+                        android:layout_marginStart="@dimen/dp_24"
+                        android:background="@drawable/bg_edittext_edit_info"
+                        android:ellipsize="end"
+                        android:hint="Nhập địa chỉ giao hàng"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp_12"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgLocation"
-                        app:layout_constraintTop_toTopOf="@id/imgLocation" />
+                        app:layout_constraintStart_toEndOf="@id/tvName"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -130,31 +134,34 @@
                     android:layout_height="@dimen/dp_60"
                     android:layout_marginStart="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:layout_marginEnd="@dimen/dp_20"
-                    android:background="@color/main_color">
+                    android:layout_marginEnd="@dimen/dp_20">
 
-                    <ImageView
-                        android:id="@+id/imgPhone"
+                    <TextView
+                        android:id="@+id/tvNumber"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
-                        android:src="@drawable/ic_phone"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="Số Điện Thoại"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/edtPhone"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/edtPhone" />
 
                     <EditText
                         android:id="@+id/edtPhone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/input_phone_number"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@id/imgPhone"
+                        android:layout_marginStart="@dimen/dp_24"
+                        android:background="@drawable/bg_edittext_edit_info"
+                        android:hint="Nhập số điện thoại"
+                        android:inputType="phone"
+                        android:padding="@dimen/dp_12"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgPhone"
-                        app:layout_constraintTop_toTopOf="@id/imgPhone" />
+                        app:layout_constraintStart_toEndOf="@id/tvNumber"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -162,32 +169,36 @@
                     android:layout_height="@dimen/dp_60"
                     android:layout_marginStart="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:layout_marginEnd="@dimen/dp_20"
-                    android:background="@color/main_color">
+                    android:layout_marginEnd="@dimen/dp_20">
 
-                    <ImageView
-                        android:id="@+id/imgEmail"
+                    <TextView
+                        android:id="@+id/tvEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
-                        android:src="@drawable/ic_email"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="@string/email"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/edtEmail"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/edtEmail" />
 
                     <EditText
                         android:id="@+id/edtEmail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/input_address_email"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@id/imgEmail"
+                        android:layout_marginStart="@dimen/dp_24"
+                        android:background="@drawable/bg_edittext_edit_info"
+                        android:ellipsize="end"
+                        android:hint="Nhập Địa chỉ email"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp_12"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@id/imgEmail"
-                        app:layout_constraintTop_toTopOf="@id/imgEmail" />
+                        app:layout_constraintStart_toEndOf="@id/tvEmail"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -195,31 +206,35 @@
                     android:layout_height="@dimen/dp_60"
                     android:layout_marginStart="@dimen/dp_20"
                     android:layout_marginTop="@dimen/dp_20"
-                    android:layout_marginEnd="@dimen/dp_20"
-                    android:background="@color/main_color">
+                    android:layout_marginEnd="@dimen/dp_20">
 
-                    <ImageView
-                        android:id="@+id/imgIcon"
+                    <TextView
+                        android:id="@+id/tvUserName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:padding="@dimen/dp_4"
-                        android:src="@drawable/ic_personal"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="Tên"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="@id/edtPersonal"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/edtPersonal" />
 
                     <EditText
                         android:id="@+id/edtPersonal"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:background="@null"
-                        android:hint="@string/input_personal"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/white"
-                        app:layout_constraintBottom_toBottomOf="@id/imgIcon"
+                        android:layout_marginStart="@dimen/dp_24"
+                        android:background="@drawable/bg_edittext_edit_info"
+                        android:ellipsize="end"
+                        android:hint="Nhập tên"
+                        android:maxLines="1"
+                        android:padding="@dimen/dp_12"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/imgIcon"
-                        app:layout_constraintTop_toTopOf="@id/imgIcon" />
+                        app:layout_constraintStart_toEndOf="@id/tvUserName"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView

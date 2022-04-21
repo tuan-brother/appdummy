@@ -19,7 +19,7 @@ import com.example.app_ban_hang_tot_nghiep.model.MenuModel;
 import java.util.HashMap;
 import java.util.List;
 
-public class    ExpandableListAdapter extends BaseExpandableListAdapter {
+public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context context;
     private List<Category> expandableListTitle;

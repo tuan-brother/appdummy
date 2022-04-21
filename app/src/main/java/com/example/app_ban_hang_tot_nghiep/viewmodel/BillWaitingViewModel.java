@@ -26,23 +26,41 @@ public class BillWaitingViewModel extends ViewModel {
         mApiService = ApiUtils.getApiService();
         List<ResponeBill> listData = new ArrayList<>();
 
-        mApiService.getBill(token).enqueue(new Callback<ResponeBill>() {
+        mApiService.getBill(token).enqueue(new Callback<List<ResponeBill>>() {
             @Override
-            public void onResponse(Call<ResponeBill> call, Response<ResponeBill> response) {
+            public void onResponse(Call<List<ResponeBill>> call, Response<List<ResponeBill>> response) {
                 if (response.isSuccessful() && response.code() == 200) {
                     if (response.body() != null) {
                         listData.clear();
-                        listData.add(response.body());
+                        listData.addAll(response.body());
                         listBill.postValue(listData);
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponeBill> call, Throwable t) {
+            public void onFailure(Call<List<ResponeBill>> call, Throwable t) {
 
             }
         });
+
+//        mApiService.getBill(token).enqueue(new Callback<ResponeBill>() {
+//            @Override
+//            public void onResponse(Call<ResponeBill> call, Response<ResponeBill> response) {
+//                if (response.isSuccessful() && response.code() == 200) {
+//                    if (response.body() != null) {
+//                        listData.clear();
+//                        listData.add(response.body());
+//                        listBill.postValue(listData);
+//                    }
+//                }
+//            }
+
+//            @Override
+//            public void onFailure(Call<ResponeBill> call, Throwable t) {
+//
+//            }
+//        });
     }
 
     public void deleteListBill(String billID, String token) {

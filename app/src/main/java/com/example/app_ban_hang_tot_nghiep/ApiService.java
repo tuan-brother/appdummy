@@ -69,7 +69,7 @@ public interface ApiService {
     Call<ResponeBill> addBills(@Path("address") String address, @Path("phone") String phone, @Path("email") String email, @Path("name") String name, @Field("token") String token);
 
     @GET("api/bills/get/{token}")
-    Call<ResponeBill> getBill(@Path("token") String token);
+    Call<List<ResponeBill>> getBill(@Path("token") String token);
 
     @FormUrlEncoded
     @POST("api/bills/cancel")

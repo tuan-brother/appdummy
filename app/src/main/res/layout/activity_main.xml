@@ -74,49 +74,55 @@
                 android:layout_gravity="start"
                 app:headerLayout="@layout/layout_header_navigation">
 
-                <LinearLayout
+                <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_180"
-                    android:orientation="vertical">
+                    android:layout_marginTop="@dimen/dp_180">
 
-                    <include
-                        android:id="@+id/homeScreen"
-                        layout="@layout/listgroupheader" />
-
-                    <include
-                        android:id="@+id/information"
-                        layout="@layout/item_infordev"
-                        android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
-
-                    <include
-                        android:id="@+id/my_bills"
-                        layout="@layout/item_my_bills"
-                        android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
-
-                    <ExpandableListView
-                        android:id="@+id/expandableListView"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/white"
-                        android:dividerHeight="0dp"
-                        android:groupIndicator="@null" />
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                    <include
-                        android:id="@+id/itemChange"
-                        layout="@layout/layout_charge_password"
-                        android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
+                        <include
+                            android:id="@+id/homeScreen"
+                            layout="@layout/listgroupheader" />
 
-                    <include
-                        android:id="@+id/itemLogout"
-                        layout="@layout/item_dang_xuat"
-                        android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
+                        <include
+                            android:id="@+id/information"
+                            layout="@layout/item_infordev"
+                            android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
 
-                    <include
-                        android:id="@+id/itemLogin"
-                        layout="@layout/item_dang_nhap"
-                        android:visibility="@{isLogin?View.GONE:View.VISIBLE}" />
-                </LinearLayout>
+                        <include
+                            android:id="@+id/my_bills"
+                            layout="@layout/item_my_bills"
+                            android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
+
+                        <com.example.app_ban_hang_tot_nghiep.view.expanlist.NonScrollExpandableListView
+                            android:id="@+id/expandableListView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/white"
+                            android:dividerHeight="0dp"
+                            android:nestedScrollingEnabled="true"
+                            android:groupIndicator="@null" />
+
+                        <include
+                            android:id="@+id/itemChange"
+                            layout="@layout/layout_charge_password"
+                            android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
+
+                        <include
+                            android:id="@+id/itemLogout"
+                            layout="@layout/item_dang_xuat"
+                            android:visibility="@{isLogin?View.VISIBLE:View.GONE}" />
+
+                        <include
+                            android:id="@+id/itemLogin"
+                            layout="@layout/item_dang_nhap"
+                            android:visibility="@{isLogin?View.GONE:View.VISIBLE}" />
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
             </com.google.android.material.navigation.NavigationView>
 
         </androidx.drawerlayout.widget.DrawerLayout>
