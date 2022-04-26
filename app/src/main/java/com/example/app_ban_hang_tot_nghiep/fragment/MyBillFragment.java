@@ -4,16 +4,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.app_ban_hang_tot_nghiep.MainActivity;
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.adapter.BillAdapter;
 import com.example.app_ban_hang_tot_nghiep.adapter.CartAdapter;
@@ -25,13 +30,29 @@ import com.example.app_ban_hang_tot_nghiep.viewmodel.BillWaitingViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyBillFragment extends Fragment implements BillAdapter.onItemCategoryClick {
+public class MyBillFragment extends Fragment implements BillAdapter.onItemCategoryClick, SwipeRefreshLayout.OnRefreshListener {
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     private FragmentMyBillBinding mBinding;
     private BillWaitingViewModel mViewModel;
     private BillAdapter mAdapter;
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mViewModel.getListBillData(token);
+                    mBinding.refreshData.setRefreshing(false);
+                } catch (Exception ex) {
+                    mBinding.refreshData.setRefreshing(false);
+                }
+            }
+        }, 2500);
+    }
+
     SharedPreferences sharedPreferences;
     String token;
     public List<ResponeBill> listData = new ArrayList<>();
@@ -49,6 +70,12 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getParentFragmentManager().setFragmentResultListener("requestKey", this, new FragmentResultListener() {
+            @Override
+            public void onFragmentResult(@NonNull String requestKey, @NonNull Bundle bundle) {
+                mViewModel.getListBillData(token);
+            }
+        });
     }
 
     @Override
@@ -60,6 +87,7 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
         token = sharedPreferences.getString("tokenID", "xxx");
         setUpAdapter();
         setUpViewModel();
+        mBinding.refreshData.setOnRefreshListener(this);
         // Inflate the layout for this fragment
         return mBinding.getRoot();
     }
@@ -76,7 +104,8 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
                 .setTitle(R.string.delete_bill_title)
                 .setPositiveButton(R.string.yes, (arg0, arg1) -> {
 //                    mBinding.spinKit.setVisibility(View.VISIBLE);
-                    mViewModel.deleteListBill(items.getId(), token);
+                    Log.d("TAG", "itemLongClickListener: " + items.getId() + "-----" + token);
+//                    mViewModel.deleteListBill(items.getId(), token);
                 })
                 .setNegativeButton(R.string.no, (arg0, arg1) -> {
 
@@ -86,7 +115,7 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
 
     private void setUpViewModel() {
         mViewModel = ViewModelProviders.of(this).get(BillWaitingViewModel.class);
-        mViewModel.getListCartData(token);
+        mViewModel.getListBillData(token);
         mViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
             listData.clear();
             listData.addAll(data);

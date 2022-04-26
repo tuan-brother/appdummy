@@ -75,6 +75,10 @@ public interface ApiService {
     @POST("api/bills/cancel")
     Call<String> deleteBill(@Field("bill_id") String billID, @Field("token") String token);
 
+    @FormUrlEncoded
+    @POST("api/bills/complete/{bill_id}")
+    Call<ResponeBill> completeBill(@Path("bill_id") String bill_id, @Field("token") String token);
+
     @GET("api/users/{token}")
     Call<UserRespone> getUser(@Path("token") String token);
 
