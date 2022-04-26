@@ -8,9 +8,9 @@ public class ResponeBill implements Serializable {
 	private boolean transporting;
 	private String finishAt;
 	private String userAddress;
-	private boolean paymentStatus;
+	private boolean payment_status;
 	private String startAt;
-	private boolean billStatus;
+	private boolean bill_status;
 	private List<ProductsItem> products;
 	private String feedback;
 	private int total;
@@ -39,7 +39,7 @@ public class ResponeBill implements Serializable {
 	}
 
 	public boolean isPaymentStatus(){
-		return paymentStatus;
+		return payment_status;
 	}
 
 	public String getStartAt(){
@@ -47,7 +47,7 @@ public class ResponeBill implements Serializable {
 	}
 
 	public boolean isBillStatus(){
-		return billStatus;
+		return bill_status;
 	}
 
 	public List<ProductsItem> getProducts(){

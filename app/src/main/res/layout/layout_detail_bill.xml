@@ -6,7 +6,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/ctlDetail"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp_8">
 
         <ImageView
             android:id="@+id/imgClose"
@@ -41,7 +42,7 @@
                 android:id="@+id/tvCode"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Mã đơn hàng"
+                android:text="@string/codeoder"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@id/tvNameBiller"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +67,7 @@
                 android:id="@+id/tvNameBiller"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tên khách hàng"
+                android:text="@string/name_other"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCode" />
@@ -90,7 +91,7 @@
                 android:id="@+id/tvTitleStatus"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Trạng thái"
+                android:text="@string/status"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@id/tvNameBiller"
                 app:layout_constraintStart_toStartOf="parent"
@@ -160,6 +161,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTitleMoney" />
+
+            <TextView
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@drawable/bg_button_login"
+                android:fontFamily="@font/open_bold"
+                android:paddingStart="@dimen/dp_30"
+                android:paddingTop="@dimen/dp_12"
+                android:paddingEnd="@dimen/dp_30"
+                android:paddingBottom="@dimen/dp_12"
+                android:text="@string/cancel_bill"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnSuccess" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:SpinKit_Color="@color/purple_700"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,7 @@ public class BottomDetailViewModel extends ViewModel {
     public ApiService mApiService;
     public MutableLiveData<ResponeBill> listCart = new MutableLiveData<>();
     public MutableLiveData<Boolean> deleteSuccess = new MutableLiveData<>();
+    public MutableLiveData<Boolean> completeSuccess = new MutableLiveData<>();
 
     public void deleteListBill(String billID, String token) {
         mApiService = ApiUtils.getApiService();
@@ -33,6 +34,25 @@ public class BottomDetailViewModel extends ViewModel {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 deleteSuccess.postValue(false);
+            }
+        });
+    }
+
+    public void receiverSuccess(String billID, String token) {
+        mApiService = ApiUtils.getApiService();
+        mApiService.completeBill(billID, token).enqueue(new Callback<ResponeBill>() {
+            @Override
+            public void onResponse(Call<ResponeBill> call, Response<ResponeBill> response) {
+                if (response.isSuccessful() && response.code() == 200) {
+                    completeSuccess.postValue(true);
+                    return;
+                }
+                completeSuccess.postValue(false);
+            }
+
+            @Override
+            public void onFailure(Call<ResponeBill> call, Throwable t) {
+                completeSuccess.postValue(false);
             }
         });
     }

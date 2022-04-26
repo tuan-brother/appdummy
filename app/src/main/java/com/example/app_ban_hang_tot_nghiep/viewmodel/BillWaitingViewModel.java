@@ -22,7 +22,7 @@ public class BillWaitingViewModel extends ViewModel {
     public MutableLiveData<List<ResponeBill>> listBill = new MutableLiveData<>();
     public MutableLiveData<Boolean> deleteSuccess = new MutableLiveData<>();
 
-    public void getListCartData(String token) {
+    public void getListBillData(String token) {
         mApiService = ApiUtils.getApiService();
         List<ResponeBill> listData = new ArrayList<>();
 
