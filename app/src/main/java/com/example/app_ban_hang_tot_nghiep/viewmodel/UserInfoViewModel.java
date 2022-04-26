@@ -19,6 +19,7 @@ import retrofit2.Response;
 public class UserInfoViewModel extends ViewModel {
     public ApiService mApiService;
     public MutableLiveData<UserRespone> userInfor = new MutableLiveData<>();
+    public MutableLiveData<Boolean> isUpdateSuccess = new MutableLiveData<>();
 
     public void getUser(String token) {
         mApiService = ApiUtils.getApiService();
@@ -44,12 +45,15 @@ public class UserInfoViewModel extends ViewModel {
             public void onResponse(Call<UserRespone> call, Response<UserRespone> response) {
                 if (response.isSuccessful() && response.code() == 200) {
                     userInfor.postValue(response.body());
+                    isUpdateSuccess.postValue(true);
+                    return;
                 }
+                isUpdateSuccess.postValue(false);
             }
 
             @Override
             public void onFailure(Call<UserRespone> call, Throwable t) {
-
+                isUpdateSuccess.postValue(false);
             }
         });
     }
