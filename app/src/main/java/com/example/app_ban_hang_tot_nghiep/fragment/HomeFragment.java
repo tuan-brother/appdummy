@@ -1,24 +1,21 @@
 package com.example.app_ban_hang_tot_nghiep.fragment;
 
 import android.os.Bundle;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProviders;
-
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.example.app_ban_hang_tot_nghiep.MainActivity;
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.adapter.HomeAdapter;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentHomeBinding;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
-import com.example.app_ban_hang_tot_nghiep.view.decor.GridSpacingItemDecoration;
-import com.example.app_ban_hang_tot_nghiep.viewmodel.HomeViewModel;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ import java.util.List;
 
 import me.farahani.spaceitemdecoration.SpaceItemDecoration;
 
-public class HomeFragment extends Fragment implements HomeAdapter.onItemClick {
+public class HomeFragment extends Fragment implements HomeAdapter.onItemClick, SwipeRefreshLayout.OnRefreshListener {
 
     public MainViewModel mViewModel;
     public FragmentHomeBinding mBinding;
@@ -56,6 +53,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.onItemClick {
             mProductList.addAll(data);
             mBinding.recycleHome.getAdapter().notifyDataSetChanged();
         });
+        mBinding.refreshData.setOnRefreshListener(this);
         setUpAdapter();
         // Inflate the layout for this fragment
         return mBinding.getRoot();
@@ -74,11 +72,27 @@ public class HomeFragment extends Fragment implements HomeAdapter.onItemClick {
     public void ItemClick(Product items) {
         ArrayList<String> listUrl = new ArrayList<>();
         listUrl.addAll(items.getImage());
-        gotaDetail(items.getId(), items.getName(), items.getPrice(), items.getPackaging(), listUrl);
+        gotaDetail(items.getId(), items.getName(), items.getPrice(), items.getDetail(), items.getQuantily(), listUrl);
     }
 
-    public void gotaDetail(String idProduce, String name, int prices, String description, ArrayList<String> listImage) {
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    mViewModel.getListHomeData();
+                    ((MainActivity) requireActivity()).refreshData();
+                    mBinding.refreshData.setRefreshing(false);
+                } catch (Exception ex) {
+                    mBinding.refreshData.setRefreshing(false);
+                }
+            }
+        }, 2500);
+    }
+
+    public void gotaDetail(String idProduce, String name, int prices, String description, int quality, ArrayList<String> listImage) {
         FragmentManager fragmentManager = getParentFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.parent_content, new DetailProductFragment().newInstance(idProduce, name, prices, description, listImage), "preview").commit();
+        fragmentManager.beginTransaction().add(R.id.parent_content, new DetailProductFragment().newInstance(idProduce, name, prices, description, quality, listImage), "preview").commit();
     }
 }

@@ -38,7 +38,7 @@ public interface ApiService {
 
     @FormUrlEncoded
     @POST("api/users/change/password")
-    Call<String> changePass(@Field("token") String token, @Field("oldPassword") String oldPass, @Field("newPass") String newPass);
+    Call<String> changePass(@Field("token") String token, @Field("oldPassword") String oldPass, @Field("newPassword") String newPass);
 
     @FormUrlEncoded
     @POST("api/users/create")

@@ -76,7 +76,7 @@ public class ChangePassFragment extends Fragment {
                     Toast.makeText(requireContext(), "Thông tin nhập chưa chính xác", Toast.LENGTH_SHORT).show();
                 } else {
                     mBinding.spinKit.setVisibility(View.VISIBLE);
-                    mViewModel.getListData(token, mBinding.editOldPass.toString().trim(), mBinding.edtPassword.toString().trim());
+                    mViewModel.getListData(token, mBinding.editOldPass.getText().toString().trim(), mBinding.edtPassword.getText().toString().trim());
                 }
             }
         });

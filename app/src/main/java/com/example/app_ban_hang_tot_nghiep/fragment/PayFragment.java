@@ -4,21 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import com.example.app_ban_hang_tot_nghiep.LoginActivity;
-import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentPayBinding;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
-import com.example.app_ban_hang_tot_nghiep.viewmodel.MainViewModel;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.PayViewModel;
 
 /**

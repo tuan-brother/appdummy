@@ -25,6 +25,7 @@ public class ChangPassViewModel extends ViewModel {
         mApiService.changePass(token, oldPass, newPass).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                Log.d("TAG345", "success:  " + response.code());
                 if (response.isSuccessful() && response.code() == 200) {
                     isSuccess.postValue(true);
                     return;
@@ -34,6 +35,8 @@ public class ChangPassViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
+
+                Log.d("TAG345", "onFailure:  }" + t.getMessage());
                 isSuccess.postValue(false);
             }
         });

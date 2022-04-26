@@ -46,19 +46,20 @@ public class DetailProductFragment extends Fragment {
     private static final String ARG_PARAM2 = "prices";
     private static final String ARG_PARAM3 = "des";
     private static final String ARG_PARAM5 = "listImage";
+    private static final String ARG_PARAM7 = "quality";
 
     // TODO: Rename and change types of parameters
     private int count = 1;
     private String token = "";
     private String id;
     private String name;
-    private Integer prices;
+    private Integer prices, quality;
     private String des;
     private List<String> mListImage;
 
 
     // TODO: Rename and change types and number of parameters
-    public static DetailProductFragment newInstance(String id, String name, int prices, String des, ArrayList<String> listString) {
+    public static DetailProductFragment newInstance(String id, String name, int prices, String des, int quality, ArrayList<String> listString) {
         DetailProductFragment fragment = new DetailProductFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, id);
@@ -66,6 +67,7 @@ public class DetailProductFragment extends Fragment {
         args.putString(ARG_PARAM3, des);
         args.putStringArrayList(ARG_PARAM5, listString);
         args.putString(ARG_PARAM6, name);
+        args.putInt(ARG_PARAM7, quality);
         fragment.setArguments(args);
         return fragment;
     }
@@ -83,6 +85,7 @@ public class DetailProductFragment extends Fragment {
             des = getArguments().getString(ARG_PARAM3);
             mListImage = getArguments().getStringArrayList(ARG_PARAM5);
             name = getArguments().getString(ARG_PARAM6);
+            quality = getArguments().getInt(ARG_PARAM7);
         }
     }
 
@@ -96,6 +99,7 @@ public class DetailProductFragment extends Fragment {
         mBinding.setPrices(new Utils().convertMoney(prices));
         mBinding.setPricesInt(prices);
         mBinding.setCountItem(1);
+        mBinding.setQuality(quality);
         setUpSlider();
         onClick();
         setUpViewModel();
@@ -118,6 +122,9 @@ public class DetailProductFragment extends Fragment {
         mBinding.imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (count > quality) {
+                    return;
+                }
                 count = count + 1;
                 mBinding.setCountItem(count);
             }

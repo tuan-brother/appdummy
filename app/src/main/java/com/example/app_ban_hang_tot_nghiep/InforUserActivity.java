@@ -31,6 +31,7 @@ import com.example.app_ban_hang_tot_nghiep.utils.RealPathUtil;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.UserInfoViewModel;
 
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -78,6 +79,14 @@ public class InforUserActivity extends AppCompatActivity {
             mBinding.setEdtPhone(data.getPhone());
             urlImage = data.getAvatar();
         });
+        mViewModel.isUpdateSuccess.observe(this, data -> {
+            mBinding.spinKit.setVisibility(View.GONE);
+            if (data) {
+                Toast.makeText(InforUserActivity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(InforUserActivity.this, "Cập nhật thông tin không thành công", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setFullScreen() {
@@ -89,18 +98,8 @@ public class InforUserActivity extends AppCompatActivity {
     }
 
     private void onClick() {
-        mBinding.tvUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mBinding.edtAdress.getText().toString().trim().equals("") | mBinding.edtName.getText().toString().trim().equals("") | mBinding.edtPhone.getText().toString().trim().equals("")) {
-                    Toast.makeText(InforUserActivity.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
-            }
-        });
-
-        mBinding.imgAvatar.setOnClickListener(new View.OnClickListener() {
+        mBinding.imgEditView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
@@ -116,13 +115,29 @@ public class InforUserActivity extends AppCompatActivity {
             }
         });
 
-        mBinding.tvUpdate.setOnClickListener(new View.OnClickListener() {
+        mBinding.imgAccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (urlInfo != null) {
-                    mBinding.spinKit.setVisibility(View.VISIBLE);
-                    updateData();
+                if (mBinding.edtDC.getText().toString().trim().equals("") | mBinding.edtNameUser.getText().toString().trim().equals("") | mBinding.edtPhone.getText().toString().trim().equals("")) {
+                    Toast.makeText(InforUserActivity.this, "Không để trống thông tin", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                mBinding.spinKit.setVisibility(View.VISIBLE);
+
+                Glide.with(InforUserActivity.this)
+                        .asBitmap()
+                        .load(urlImage)
+                        .into(new CustomTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                File file = bitmaptoFile(resource);
+                                updateData(file);
+                            }
+
+                            @Override
+                            public void onLoadCleared(@Nullable Drawable placeholder) {
+                            }
+                        });
             }
         });
 
@@ -158,23 +173,52 @@ public class InforUserActivity extends AppCompatActivity {
             if (data != null) {
                 Uri uriImage = data.getData();
                 urlInfo = uriImage;
-                urlImage = "";
+                urlImage = data.getData().toString();
                 mBinding.imgAvatar.setImageURI(uriImage);
             }
         }
     }
 
 
-    private void updateData() {
-        RequestBody requestBodyName = RequestBody.create(MediaType.parse("multipart/form-data"), mBinding.edtName.getText().toString().trim());
-        RequestBody requestBodyAddress = RequestBody.create(MediaType.parse("multipart/form-data"), mBinding.edtAdress.getText().toString().trim());
+    private void updateData(File file) {
+        RequestBody requestBodyName = RequestBody.create(MediaType.parse("multipart/form-data"), mBinding.edtNameUser.getText().toString().trim());
+        RequestBody requestBodyAddress = RequestBody.create(MediaType.parse("multipart/form-data"), mBinding.edtDC.getText().toString().trim());
         RequestBody requestBodyPhone = RequestBody.create(MediaType.parse("multipart/form-data"), mBinding.edtPhone.getText().toString().trim());
         RequestBody requestBodyToken = RequestBody.create(MediaType.parse("multipart/form-data"), token);
-        String path = RealPathUtil.getRealPath(this, urlInfo);
-        File file = new File(path);
+//        String path = RealPathUtil.getRealPath(this, urlInfo);
+//        File file = new File(path);
 
         RequestBody requestBodyAvatar = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part multiPart = MultipartBody.Part.createFormData("avatar", file.getName(), requestBodyAvatar);
         mViewModel.updateInfoUse(multiPart, requestBodyAddress, requestBodyName, requestBodyPhone, requestBodyToken);
+    }
+
+    private File bitmaptoFile(Bitmap bitmap) {
+//        val wrapper = ContextWrapper(applicationContext)
+
+        // Initialize a new file instance to save bitmap object
+//        var file = wrapper.getDir("Images", Context.MODE_PRIVATE)
+//        file = File(file, "${UUID.randomUUID()}.jpg");
+
+        ContextWrapper wrapper1 = new ContextWrapper(getApplicationContext());
+
+        File f = wrapper1.getDir("Images", Context.MODE_PRIVATE);
+        f = new File(f, UUID.randomUUID() + ".jpg");
+
+        //Convert bitmap to byte array
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+
+            //write the bytes in file
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        } catch (Exception ex) {
+
+        }
+        return f;
     }
 }

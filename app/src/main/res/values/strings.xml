@@ -80,5 +80,7 @@
     <string name="address">Địa chỉ</string>
     <string name="codebill">Mã đơn hàng: </string>
     <string name="reciver_success">Đã nhận được hàng</string>
+    <string name="name">Tên</string>
+    <string name="sdt">SĐT</string>
 
 </resources>

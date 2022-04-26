@@ -312,6 +312,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.renewItems(sliderItemList);
     }
 
+    public void refreshData() {
+        mViewModel.getListCategory();
+    }
+
     public void gotoSearch() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().add(R.id.parent_content, new SearchFragment(), "search").commit();
