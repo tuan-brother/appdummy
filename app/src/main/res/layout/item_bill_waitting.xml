@@ -16,11 +16,20 @@
         <variable
             name="date"
             type="String" />
+
+        <variable
+            name="customer"
+            type="String" />
+
+        <variable
+            name="status"
+            type="String" />
     </data>
 
     <com.jcminarro.roundkornerlayout.RoundKornerLinearLayout
+        android:id="@+id/rllBill"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/dp_16"
         android:background="#FF5722"
         app:corner_radius="@dimen/dp_16"
@@ -37,17 +46,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/codebill"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/tvTotal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
                 android:ellipsize="end"
                 android:lines="1"
-                android:layout_marginStart="@dimen/dp_12"
                 android:maxLength="6"
                 android:text="@{billCodes}"
                 android:textColor="@color/white"
@@ -64,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/total_count_money"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/tvStatus"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCode" />
 
@@ -87,25 +93,49 @@
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/date"
+                android:text="@string/customer"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvTotal" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="@{date}"
-                android:layout_marginStart="@dimen/dp_12"
+                android:text="@{customer}"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@id/tvStatus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvStatus"
                 app:layout_constraintTop_toTopOf="@id/tvStatus"
+                tools:text="Đang chờ xác nhận" />
+
+            <TextView
+                android:id="@+id/statusBill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/status"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvStatus" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="@{status}"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/statusBill"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/statusBill"
+                app:layout_constraintTop_toTopOf="@id/statusBill"
                 tools:text="Đang chờ xác nhận" />
 
 

@@ -145,11 +145,10 @@
                 android:id="@+id/tvPr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/price_product"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@id/tvTitle"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+                app:layout_constraintTop_toTopOf="@id/tvPrices" />
 
             <TextView
                 android:id="@+id/tvPrices"
@@ -158,11 +157,12 @@
                 android:fontFamily="@font/robotoregular"
                 android:gravity="center"
                 android:text="@{prices}"
+                android:layout_marginTop="@dimen/dp_8"
                 android:textColor="@color/main_color"
                 android:textSize="20sp"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvPr"
-                app:layout_constraintTop_toTopOf="@id/tvPr" />
+                app:layout_constraintStart_toEndOf="@id/tvPr" />
 
             <TextView
                 android:id="@+id/tvQL"
@@ -171,10 +171,9 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/count"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/tvD"
                 app:layout_constraintStart_toStartOf="@id/tvPr"
-                app:layout_constraintTop_toBottomOf="@id/tvPr"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toTopOf="@id/tvQuality"
+                app:layout_constraintBottom_toBottomOf="@id/tvQuality"/>
 
             <TextView
                 android:id="@+id/tvQuality"
@@ -185,9 +184,10 @@
                 android:text="@{quality.toString()}"
                 android:textColor="@color/main_color"
                 android:textSize="20sp"
+                android:layout_marginTop="@dimen/dp_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvQL"
-                app:layout_constraintTop_toTopOf="@id/tvQL" />
+                app:layout_constraintTop_toBottomOf="@id/tvPrices" />
 
             <TextView
                 android:id="@+id/tvD"
@@ -196,10 +196,9 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/description"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/tvDes"
                 app:layout_constraintStart_toStartOf="@id/tvQL"
-                app:layout_constraintTop_toBottomOf="@id/tvQL"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintTop_toTopOf="@id/tvDes" />
 
             <TextView
                 android:id="@+id/tvDes"
@@ -207,14 +206,15 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:fontFamily="@font/robotoregular"
-                android:gravity="center"
-                android:maxLines="1"
+                android:maxLines="4"
+                android:layout_marginStart="@dimen/dp_10"
                 android:text="@{description}"
                 android:textColor="@color/main_color"
                 android:textSize="20sp"
+                android:layout_marginTop="@dimen/dp_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvD"
-                app:layout_constraintTop_toTopOf="@id/tvD" />
+                app:layout_constraintTop_toBottomOf="@id/tvQuality" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

@@ -83,8 +83,9 @@
     <string name="name">Tên</string>
     <string name="sdt">SĐT</string>
     <string name="name_other">Tên khách hàng</string>
-    <string name="status">Trạng thái</string>
     <string name="codeoder">Mã đơn hàng</string>
     <string name="cancel_bill">Hủy Đơn Hàng</string>
+    <string name="customer">Khách Hàng</string>
+    <string name="status">Trạng thái</string>
 
 </resources>

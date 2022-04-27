@@ -7,8 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_70">#ECECEC</color>
     <color name="white_60">#99FFFFFF</color>
     <color name="main_color">#bd2808</color>
+    <color name="main_color_70">#E6BD2808</color>
     <color name="neutral_7">#F4F5F6</color>
     <color name="stoke_edittext_edit_info">#666AB7CE</color>
+    <color name="color_complete">#03A9F4</color>
+    <color name="color_transport">#FF9800</color>
+    <color name="color_waiting">#4CAF50</color>
 </resources>
