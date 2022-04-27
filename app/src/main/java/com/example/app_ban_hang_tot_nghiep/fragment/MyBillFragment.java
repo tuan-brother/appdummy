@@ -100,23 +100,24 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
 
     @Override
     public void itemLongClickListener(ResponeBill items) {
-        new AlertDialog.Builder(requireContext()).setMessage(R.string.delete_bill)
-                .setTitle(R.string.delete_bill_title)
-                .setPositiveButton(R.string.yes, (arg0, arg1) -> {
-//                    mBinding.spinKit.setVisibility(View.VISIBLE);
-                    Log.d("TAG", "itemLongClickListener: " + items.getId() + "-----" + token);
-//                    mViewModel.deleteListBill(items.getId(), token);
-                })
-                .setNegativeButton(R.string.no, (arg0, arg1) -> {
-
-                })
-                .show();
+//        new AlertDialog.Builder(requireContext()).setMessage(R.string.delete_bill)
+//                .setTitle(R.string.delete_bill_title)
+//                .setPositiveButton(R.string.yes, (arg0, arg1) -> {
+////                    mBinding.spinKit.setVisibility(View.VISIBLE);
+//                    Log.d("TAG", "itemLongClickListener: " + items.getId() + "-----" + token);
+////                    mViewModel.deleteListBill(items.getId(), token);
+//                })
+//                .setNegativeButton(R.string.no, (arg0, arg1) -> {
+//
+//                })
+//                .show();
     }
 
     private void setUpViewModel() {
         mViewModel = ViewModelProviders.of(this).get(BillWaitingViewModel.class);
         mViewModel.getListBillData(token);
         mViewModel.listBill.observe(getViewLifecycleOwner(), data -> {
+            mBinding.spinKit.setVisibility(View.GONE);
             listData.clear();
             listData.addAll(data);
             mBinding.recycleBill.getAdapter().notifyDataSetChanged();
