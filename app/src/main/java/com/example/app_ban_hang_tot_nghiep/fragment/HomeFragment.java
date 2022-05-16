@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.onItemClick, S
     public void ItemClick(Product items) {
         ArrayList<String> listUrl = new ArrayList<>();
         listUrl.addAll(items.getImage());
-        gotaDetail(items.getId(), items.getName(), items.getPrice(), items.getDetail(), items.getQuantily(), listUrl);
+        gotaDetail(items.getId(), items.getName(), 0, items.getDetail(), 0, listUrl);
     }
 
     @Override

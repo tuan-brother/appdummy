@@ -93,19 +93,14 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
             List<ItemCartMoreInfo> listItem = new ArrayList<>();
             mBinding.spinKit.setVisibility(View.GONE);
             if (mViewModel.listSearch.size() > 0) {
-
                 for (int i = 0; i < cart.getProducts().size(); i++) {
-                    for (int j = 0; j < mViewModel.listSearch.size(); j++) {
-                        if (cart.getProducts().get(i).getProductId().equals(mViewModel.listSearch.get(j).getId())) {
-                            ItemCartMoreInfo itemCart = new ItemCartMoreInfo();
-                            itemCart.setAmount(cart.getProducts().get(i).getAmount());
-                            itemCart.setPrice(cart.getProducts().get(i).getPrice());
-                            itemCart.setImage(mViewModel.listSearch.get(j).getImage().get(0));
-                            itemCart.setProductName(cart.getProducts().get(i).getProductName());
-                            itemCart.setProductId(cart.getProducts().get(i).getProductId());
-                            listItem.add(itemCart);
-                        }
-                    }
+
+                    ItemCartMoreInfo itemCart = new ItemCartMoreInfo();
+                    itemCart.setAmount(cart.getProducts().get(i).getAmount());
+                    itemCart.setPrice(cart.getProducts().get(i).getPrice());
+                    itemCart.setProductName(cart.getProducts().get(i).getProductName());
+                    itemCart.setProductId(cart.getProducts().get(i).getProductId());
+                    listItem.add(itemCart);
                 }
                 totalMoney = cart.getTotal();
                 mBinding.setTotal(new Utils().convertMoney(cart.getTotal()));

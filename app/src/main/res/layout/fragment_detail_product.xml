@@ -136,10 +136,20 @@
                 android:text="@{name}"
                 android:textColor="@color/main_color"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toTopOf="@id/tvPr"
+                app:layout_constraintBottom_toTopOf="@id/cateRecycleView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/vpSlide"
                 app:layout_constraintTop_toBottomOf="@id/vpSlide" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/cateRecycleView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toTopOf="@id/tvPr"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                tools:listitem="@layout/item_category" />
 
             <TextView
                 android:id="@+id/tvPr"
@@ -154,15 +164,15 @@
                 android:id="@+id/tvPrices"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
                 android:fontFamily="@font/robotoregular"
                 android:gravity="center"
                 android:text="@{prices}"
-                android:layout_marginTop="@dimen/dp_8"
                 android:textColor="@color/main_color"
                 android:textSize="20sp"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvPr" />
+                app:layout_constraintStart_toEndOf="@id/tvPr"
+                app:layout_constraintTop_toBottomOf="@id/cateRecycleView" />
 
             <TextView
                 android:id="@+id/tvQL"
@@ -171,20 +181,20 @@
                 android:layout_marginTop="@dimen/dp_8"
                 android:text="@string/count"
                 android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@id/tvQuality"
                 app:layout_constraintStart_toStartOf="@id/tvPr"
-                app:layout_constraintTop_toTopOf="@id/tvQuality"
-                app:layout_constraintBottom_toBottomOf="@id/tvQuality"/>
+                app:layout_constraintTop_toTopOf="@id/tvQuality" />
 
             <TextView
                 android:id="@+id/tvQuality"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
                 android:fontFamily="@font/robotoregular"
                 android:gravity="center"
                 android:text="@{quality.toString()}"
                 android:textColor="@color/main_color"
                 android:textSize="20sp"
-                android:layout_marginTop="@dimen/dp_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvQL"
                 app:layout_constraintTop_toBottomOf="@id/tvPrices" />
@@ -204,14 +214,14 @@
                 android:id="@+id/tvDes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_8"
                 android:ellipsize="end"
                 android:fontFamily="@font/robotoregular"
                 android:maxLines="4"
-                android:layout_marginStart="@dimen/dp_10"
                 android:text="@{description}"
                 android:textColor="@color/main_color"
                 android:textSize="20sp"
-                android:layout_marginTop="@dimen/dp_8"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/tvD"
                 app:layout_constraintTop_toBottomOf="@id/tvQuality" />

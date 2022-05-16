@@ -1,8 +1,8 @@
 package com.example.app_ban_hang_tot_nghiep;
 
 import com.example.app_ban_hang_tot_nghiep.model.Cart;
-import com.example.app_ban_hang_tot_nghiep.model.CartData;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
+import com.example.app_ban_hang_tot_nghiep.model.DetailProduct;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.model.ResponeBill;
 import com.example.app_ban_hang_tot_nghiep.model.Token;
@@ -14,17 +14,13 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -46,6 +42,9 @@ public interface ApiService {
 
     @GET("api/products/getall")
     Call<List<Product>> getListProducts();
+
+    @GET("api/products/detail/{idProduct}")
+    Call<List<DetailProduct>> getListDetailProduct(@Path("idProduct") String id);
 
     @GET("api/categories/getall")
     Call<List<Category>> getListCategory();
