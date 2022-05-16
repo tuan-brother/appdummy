@@ -7,11 +7,8 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_ban_hang_tot_nghiep.databinding.ItemHomeProductBinding;
 import com.example.app_ban_hang_tot_nghiep.databinding.ItemListCartBinding;
 import com.example.app_ban_hang_tot_nghiep.model.ItemCartMoreInfo;
-import com.example.app_ban_hang_tot_nghiep.model.ItemProductCartItem;
-import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 
 import java.util.List;
