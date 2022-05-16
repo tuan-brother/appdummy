@@ -145,47 +145,40 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Ca
         if (mViewModel.listSearch.size() > 0) {
             List<ItemCartMoreInfo> listItem = new ArrayList<>();
             for (int i = 0; i < dataBill.getProducts().size(); i++) {
-                Log.d("TAG", "setupData: " + dataBill.getProducts().get(i).getProductId());
-                for (int j = 0; j < mViewModel.listSearch.size(); j++) {
-                    Log.d("TAG", "search: " + mViewModel.listSearch.get(j).getId());
-                    if (dataBill.getProducts().get(i).getProductId().equals(mViewModel.listSearch.get(j).getId())) {
-                        ItemCartMoreInfo itemCart = new ItemCartMoreInfo();
-                        itemCart.setAmount(dataBill.getProducts().get(i).getAmount());
-                        itemCart.setPrice(dataBill.getProducts().get(i).getPrice());
-                        itemCart.setImage(mViewModel.listSearch.get(j).getImage().get(0));
-                        itemCart.setProductName(dataBill.getProducts().get(i).getProductName());
-                        itemCart.setProductId(dataBill.getProducts().get(i).getProductId());
-                        listItem.add(itemCart);
-                    }
-                }
-                mListData.clear();
-                mListData.addAll(listItem);
-                mAdapter = new CartAdapter(mListData, getContext(), this);
-                mBinding.recycleOrder.setAdapter(mAdapter);
-                mBinding.recycleOrder.getAdapter().notifyDataSetChanged();
-                mBinding.tvCodeShow.setText(dataBill.getId());
-                iD = dataBill.getId();
-                mBinding.tvNameCustomer.setText(dataBill.getUsername());
-                Log.d("TAG", "setupData: " + dataBill.isBillStatus() + dataBill.isPaymentStatus() + dataBill.isTransporting());
-                if (dataBill.isBillStatus() && dataBill.isPaymentStatus() && dataBill.isTransporting()) {
-                    mBinding.tvStatusBill.setText("Đã nhận và thanh toán hàng");
-                    mBinding.btnSuccess.setVisibility(View.GONE);
-                    mBinding.btnCancel.setVisibility(View.GONE);
-                } else if (dataBill.isBillStatus() && dataBill.isTransporting()) {
-                    mBinding.tvStatusBill.setText("Đang giao hàng");
-                    mBinding.btnCancel.setVisibility(View.GONE);
-                } else if (dataBill.isBillStatus()) {
-                    mBinding.tvStatusBill.setText("Đã xác nhận");
-                    mBinding.btnCancel.setVisibility(View.GONE);
-                } else if (!dataBill.isBillStatus()) {
-                    mBinding.tvStatusBill.setText("Đang chờ xác nhận");
-                    mBinding.btnSuccess.setVisibility(View.GONE);
-                } else {
-                    mBinding.tvStatusBill.setText("Đang giao hàng");
-                    mBinding.btnCancel.setVisibility(View.GONE);
-                }
-                mBinding.tvMoneyCount.setText(new Utils().convertMoney(dataBill.getTotal()));
+                ItemCartMoreInfo itemCart = new ItemCartMoreInfo();
+                itemCart.setAmount(dataBill.getProducts().get(i).getAmount());
+                itemCart.setPrice(dataBill.getProducts().get(i).getPrice());
+                itemCart.setProductName(dataBill.getProducts().get(i).getProductName());
+                itemCart.setProductId(dataBill.getProducts().get(i).getProductId());
+                listItem.add(itemCart);
             }
+            mListData.clear();
+            mListData.addAll(listItem);
+            mAdapter = new CartAdapter(mListData, getContext(), this);
+            mBinding.recycleOrder.setAdapter(mAdapter);
+            mBinding.recycleOrder.getAdapter().notifyDataSetChanged();
+            mBinding.tvCodeShow.setText(dataBill.getId());
+            iD = dataBill.getId();
+            mBinding.tvNameCustomer.setText(dataBill.getUsername());
+            Log.d("TAG", "setupData: " + dataBill.isBillStatus() + dataBill.isPaymentStatus() + dataBill.isTransporting());
+            if (dataBill.isBillStatus() && dataBill.isPaymentStatus() && dataBill.isTransporting()) {
+                mBinding.tvStatusBill.setText("Đã nhận và thanh toán hàng");
+                mBinding.btnSuccess.setVisibility(View.GONE);
+                mBinding.btnCancel.setVisibility(View.GONE);
+            } else if (dataBill.isBillStatus() && dataBill.isTransporting()) {
+                mBinding.tvStatusBill.setText("Đang giao hàng");
+                mBinding.btnCancel.setVisibility(View.GONE);
+            } else if (dataBill.isBillStatus()) {
+                mBinding.tvStatusBill.setText("Đã xác nhận");
+                mBinding.btnCancel.setVisibility(View.GONE);
+            } else if (!dataBill.isBillStatus()) {
+                mBinding.tvStatusBill.setText("Đang chờ xác nhận");
+                mBinding.btnSuccess.setVisibility(View.GONE);
+            } else {
+                mBinding.tvStatusBill.setText("Đang giao hàng");
+                mBinding.btnCancel.setVisibility(View.GONE);
+            }
+            mBinding.tvMoneyCount.setText(new Utils().convertMoney(dataBill.getTotal()));
         }
     }
 
