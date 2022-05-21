@@ -30,4 +30,5 @@
     <dimen name="dp_250">250dp</dimen>
     <dimen name="dp_29">29dp</dimen>
     <dimen name="dp_19">19dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
 </resources>

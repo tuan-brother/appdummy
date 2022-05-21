@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -17,39 +16,34 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.app_ban_hang_tot_nghiep.LoginActivity;
-import com.example.app_ban_hang_tot_nghiep.R;
-import com.example.app_ban_hang_tot_nghiep.adapter.CartAdapter;
 import com.example.app_ban_hang_tot_nghiep.adapter.ListCategoryAdapter;
 import com.example.app_ban_hang_tot_nghiep.adapter.SliderAdapterExample;
-import com.example.app_ban_hang_tot_nghiep.adapter.ViewPagerAdapter;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentDetailProductBinding;
 import com.example.app_ban_hang_tot_nghiep.model.DetailProduct;
-import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.model.SliderItem;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.DetailViewModel;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
-import com.example.app_ban_hang_tot_nghiep.adapter.ListCategoryAdapter;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
 
 public class DetailProductFragment extends Fragment implements ListCategoryAdapter.onDetailItemClick {
     public FragmentDetailProductBinding mBinding;
     public SharedPreferences mSharedPreferences;
     public DetailViewModel mViewModel;
     private SliderAdapterExample adapter;
+    private DetailProduct data;
     private ListCategoryAdapter mCategoryAdapter;
     private List<DetailProduct> mListDetail = new ArrayList<>();
 
     @Override
     public void ItemClick(DetailProduct items, Integer position) {
+        data = items;
         setUpData(items);
+        setUpImage(items);
     }
 
     public List<DetailProduct> mDetailProducts = new ArrayList<>();
@@ -164,6 +158,21 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
                 mViewModel.addProductToCart(idCate, token, count);
             }
         });
+
+        mBinding.imgAddFavourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mSharedPreferences.getString("tokenID", "xxx").equals("xxx")) {
+                    Intent intent = new Intent(requireContext(), LoginActivity.class);
+                    startActivityForResult(intent, 6677);
+                    return;
+                }
+                token = mSharedPreferences.getString("tokenID", "xxx");
+                Log.d("TAG234", "onClick: " + token);
+                mBinding.spinKit.setVisibility(View.VISIBLE);
+                mViewModel.addToFavourite(token, data.getId());
+            }
+        });
     }
 
     public void setUpViewModel() {
@@ -185,6 +194,15 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
             mDetailProducts.addAll(data);
             setUpData(mDetailProducts.get(0));
             mBinding.cateRecycleView.getAdapter().notifyDataSetChanged();
+        });
+
+        mViewModel.addDataSuccess.observe(getViewLifecycleOwner(), isSuccess -> {
+            mBinding.spinKit.setVisibility(View.GONE);
+            if (isSuccess) {
+                Toast.makeText(requireContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(requireContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -211,6 +229,15 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
 
         for (int i = 0; i < mListImage.size(); i++) {
             sliderItemList.add(new SliderItem("", mListImage.get(i)));
+        }
+        adapter.renewItems(sliderItemList);
+    }
+
+    public void setUpImage(DetailProduct items) {
+        List<SliderItem> sliderItemList = new ArrayList<>();
+
+        for (int i = 0; i < items.getImage().size(); i++) {
+            sliderItemList.add(new SliderItem("", items.getImage().get(i)));
         }
         adapter.renewItems(sliderItemList);
     }

@@ -9,6 +9,7 @@ import com.example.app_ban_hang_tot_nghiep.ApiService;
 import com.example.app_ban_hang_tot_nghiep.ApiUtils;
 import com.example.app_ban_hang_tot_nghiep.model.Cart;
 import com.example.app_ban_hang_tot_nghiep.model.DetailProduct;
+import com.example.app_ban_hang_tot_nghiep.model.ResponseAddFavourite;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import retrofit2.Response;
 public class DetailViewModel extends ViewModel {
     public ApiService mApiService;
     public MutableLiveData<Boolean> listData = new MutableLiveData<>();
+    public MutableLiveData<Boolean> addDataSuccess = new MutableLiveData<>();
     public MutableLiveData<List<DetailProduct>> listDetail = new MutableLiveData<>();
 
     public void addProductToCart(String id, String token, int amount) {
@@ -56,6 +58,25 @@ public class DetailViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<DetailProduct>> call, Throwable t) {
                 Log.d("TAG", "faild: " + t.getMessage());
+            }
+        });
+    }
+
+    public void addToFavourite(String token, String variID) {
+        mApiService = ApiUtils.getApiService();
+        mApiService.addFavourite(token, variID).enqueue(new Callback<ResponseAddFavourite>() {
+            @Override
+            public void onResponse(Call<ResponseAddFavourite> call, Response<ResponseAddFavourite> response) {
+                if (response.isSuccessful() && response.code() == 200) {
+                    addDataSuccess.postValue(true);
+                    return;
+                }
+                addDataSuccess.postValue(false);
+            }
+
+            @Override
+            public void onFailure(Call<ResponseAddFavourite> call, Throwable t) {
+                addDataSuccess.postValue(false);
             }
         });
     }

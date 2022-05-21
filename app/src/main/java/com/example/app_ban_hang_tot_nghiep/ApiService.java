@@ -2,9 +2,12 @@ package com.example.app_ban_hang_tot_nghiep;
 
 import com.example.app_ban_hang_tot_nghiep.model.Cart;
 import com.example.app_ban_hang_tot_nghiep.model.Category;
+import com.example.app_ban_hang_tot_nghiep.model.ChangeCartParams;
 import com.example.app_ban_hang_tot_nghiep.model.DetailProduct;
+import com.example.app_ban_hang_tot_nghiep.model.ItemProductCart;
 import com.example.app_ban_hang_tot_nghiep.model.Product;
 import com.example.app_ban_hang_tot_nghiep.model.ResponeBill;
+import com.example.app_ban_hang_tot_nghiep.model.ResponseAddFavourite;
 import com.example.app_ban_hang_tot_nghiep.model.Token;
 import com.example.app_ban_hang_tot_nghiep.model.UserInfo;
 import com.example.app_ban_hang_tot_nghiep.model.UserRespone;
@@ -14,6 +17,7 @@ import java.util.List;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -88,4 +92,16 @@ public interface ApiService {
                                       @Part("name") RequestBody name,
                                       @Part("phone") RequestBody phone,
                                       @Part("token") RequestBody token);
+
+    @GET("api/users/favorite/{token}")
+    Call<List<DetailProduct>> getFavorite(@Path("token") String tokenUser);
+
+    @FormUrlEncoded
+    @POST("api/users/favorite/add/{token}")
+    Call<ResponseAddFavourite> addFavourite(@Path("token") String token, @Field("variant_id") String variantId);
+
+    @POST("api/cart/update")
+    Call<Cart> updateCart(@Body ChangeCartParams body);
+
+
 }

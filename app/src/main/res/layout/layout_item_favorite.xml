@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <data>
+        <variable
+            name="urlImage"
+            type="String" />
+
+        <variable
+            name="nameProduct"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgProduct"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_80"
+            android:scaleType="fitXY"
+            app:imageUrl="@{urlImage}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/imageProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:fontFamily="@font/robotoregular"
+            android:singleLine="true"
+            android:textSize="18sp"
+            android:text="@{nameProduct}"
+            app:layout_constraintEnd_toEndOf="@id/imgProduct"
+            app:layout_constraintStart_toStartOf="@id/imgProduct"
+            app:layout_constraintTop_toBottomOf="@id/imgProduct"
+            tools:text="Thông tin sản phẩm" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
