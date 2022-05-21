@@ -8,67 +8,52 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_ban_hang_tot_nghiep.databinding.ItemListCartBinding;
-import com.example.app_ban_hang_tot_nghiep.model.ItemCartMoreInfo;
 import com.example.app_ban_hang_tot_nghiep.model.ItemProductCart;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 
 import java.util.List;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
+public class BillInfoAdapter extends RecyclerView.Adapter<BillInfoAdapter.ViewHolder> {
 
     private List<ItemProductCart> mCartList;
     // Lưu Context để dễ dàng truy cập
     private Context mContext;
 
-    private CartAdapter.onItemClick onClick;
+    private BillInfoAdapter.onItemClick onClick;
 
-    public CartAdapter(List<ItemProductCart> mCart, Context mContext, CartAdapter.onItemClick onClick) {
+    public BillInfoAdapter(List<ItemProductCart> mCart, Context mContext, BillInfoAdapter.onItemClick onClick) {
         this.mCartList = mCart;
         this.mContext = mContext;
         this.onClick = onClick;
     }
 
     @Override
-    public CartAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BillInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
         ItemListCartBinding binding = ItemListCartBinding.inflate(inflater, parent, false);
 
-        return new CartAdapter.ViewHolder(binding);
+        return new BillInfoAdapter.ViewHolder(binding);
 
     }
 
     @Override
-    public void onBindViewHolder(CartAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(BillInfoAdapter.ViewHolder holder, int position) {
         ItemProductCart data = mCartList.get(position);
         holder.onBind(data);
-//        holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                onClick.ItemClick(data);
-//            }
-//        });
-
-        holder.mBinding.imgPlus.setOnClickListener(new View.OnClickListener() {
+        holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClick.onPlusClick(data);
+                onClick.ItemClick(data);
             }
         });
-
-        holder.mBinding.imgMinus.setOnClickListener(new View.OnClickListener() {
+        holder.mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
-                onClick.onMinusClick(data);
+            public boolean onLongClick(View view) {
+                onClick.onLongClick(data);
+                return false;
             }
         });
-//        holder.mBinding.getRoot().setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View view) {
-//                onClick.onLongClick(data);
-//                return false;
-//            }
-//        });
     }
 
     @Override
@@ -92,7 +77,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             mBinding.setPrices(new Utils().convertMoney(items.getPrice()));
             mBinding.setTitle(items.getProductName());
             mBinding.setDes(items.getAmount() + "");
-            mBinding.setUrlImage(items.getImage().get(0));
+//            mBinding.setUrlImage(items.getImage().get(0));
         }
     }
 
@@ -100,9 +85,5 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         public void ItemClick(ItemProductCart items);
 
         public void onLongClick(ItemProductCart items);
-
-        public void onPlusClick(ItemProductCart items);
-
-        public void onMinusClick(ItemProductCart items);
     }
 }

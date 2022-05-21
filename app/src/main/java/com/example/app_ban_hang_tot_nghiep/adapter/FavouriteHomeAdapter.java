@@ -7,23 +7,21 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.app_ban_hang_tot_nghiep.R;
-import com.example.app_ban_hang_tot_nghiep.databinding.ItemCategoryBinding;
+import com.example.app_ban_hang_tot_nghiep.databinding.LayoutItemFavoriteBinding;
 import com.example.app_ban_hang_tot_nghiep.model.DetailProduct;
 
 import java.util.List;
 
-public class ListCategoryAdapter extends RecyclerView.Adapter<ListCategoryAdapter.ViewHolder> {
+public class FavouriteHomeAdapter extends RecyclerView.Adapter<FavouriteHomeAdapter.ViewHolder> {
     //Dữ liệu hiện thị là danh sách sinh viên
     private List<DetailProduct> mProductList;
     // Lưu Context để dễ dàng truy cập
     private Context mContext;
-    int selectItem = 0;
 
-    private onDetailItemClick onClick;
+    private onItemFavouriteClick onClick;
 
-    public ListCategoryAdapter(List<DetailProduct> mListDetail, Context mContext, onDetailItemClick onClick) {
-        this.mProductList = mListDetail;
+    public FavouriteHomeAdapter(List<DetailProduct> listFavourite, Context mContext, onItemFavouriteClick onClick) {
+        this.mProductList = listFavourite;
         this.mContext = mContext;
         this.onClick = onClick;
     }
@@ -32,7 +30,7 @@ public class ListCategoryAdapter extends RecyclerView.Adapter<ListCategoryAdapte
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        ItemCategoryBinding binding = ItemCategoryBinding.inflate(inflater, parent, false);
+        LayoutItemFavoriteBinding binding = LayoutItemFavoriteBinding.inflate(inflater, parent, false);
 
         return new ViewHolder(binding);
 
@@ -42,18 +40,10 @@ public class ListCategoryAdapter extends RecyclerView.Adapter<ListCategoryAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         DetailProduct data = mProductList.get(position);
         holder.onBind(data);
-        if (selectItem == position) {
-            holder.mBinding.getRoot().setBackground(mContext.getResources().getDrawable(R.drawable.bg_view_corner_20_color_neutral_8_selected));
-        } else {
-            holder.mBinding.getRoot().setBackground(mContext.getResources().getDrawable(R.drawable.bg_view_corner_20_color_neutral_8));
-        }
         holder.mBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClick.ItemClick(data, position);
-                notifyItemChanged(selectItem);
-                selectItem = position;
-                notifyItemChanged(selectItem);
+                onClick.onFavouriteClick(data);
             }
         });
     }
@@ -68,19 +58,21 @@ public class ListCategoryAdapter extends RecyclerView.Adapter<ListCategoryAdapte
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ItemCategoryBinding mBinding;
+        LayoutItemFavoriteBinding mBinding;
 
-        public ViewHolder(ItemCategoryBinding binding) {
+        public ViewHolder(LayoutItemFavoriteBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
 
         public void onBind(DetailProduct items) {
-            mBinding.setName(items.getSize().toString());
+//            mBinding.tvPrices.setText(new Utils().convertMoney(items.getPrice()));
+            mBinding.setUrlImage(items.getImage().get(0));
+            mBinding.setNameProduct(items.getName());
         }
     }
 
-    public interface onDetailItemClick {
-        public void ItemClick(DetailProduct items, Integer position);
+    public interface onItemFavouriteClick {
+        public void onFavouriteClick(DetailProduct items);
     }
 }

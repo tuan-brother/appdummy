@@ -2,27 +2,20 @@ package com.example.app_ban_hang_tot_nghiep.model;
 
 import java.util.List;
 
-public class DetailProduct{
+public class FavoriteItem{
 	private List<String> image;
 	private int amount;
 	private String color;
-	private String origin;
-	private String certificate;
-	private String preserve;
 	private String smell;
 	private String mfg;
 	private int importPrice;
 	private String measure;
 	private String size;
 	private int price;
-	private String product_id;
-	private String name;
-	private String ingredients;
-	private String warning;
-	private String _id;
-	private String detail;
+	private String productId;
+	private int V;
+	private String id;
 	private String exp;
-	private String category;
 
 	public List<String> getImage(){
 		return image;
@@ -34,18 +27,6 @@ public class DetailProduct{
 
 	public String getColor(){
 		return color;
-	}
-
-	public String getOrigin(){
-		return origin;
-	}
-
-	public String getCertificate(){
-		return certificate;
-	}
-
-	public String getPreserve(){
-		return preserve;
 	}
 
 	public String getSmell(){
@@ -73,34 +54,18 @@ public class DetailProduct{
 	}
 
 	public String getProductId(){
-		return product_id;
+		return productId;
 	}
 
-	public String getName(){
-		return name;
-	}
-
-	public String getIngredients(){
-		return ingredients;
-	}
-
-	public String getWarning(){
-		return warning;
+	public int getV(){
+		return V;
 	}
 
 	public String getId(){
-		return _id;
-	}
-
-	public String getDetail(){
-		return detail;
+		return id;
 	}
 
 	public String getExp(){
 		return exp;
-	}
-
-	public String getCategory(){
-		return category;
 	}
 }
