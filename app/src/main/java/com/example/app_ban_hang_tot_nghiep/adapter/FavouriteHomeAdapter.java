@@ -67,7 +67,9 @@ public class FavouriteHomeAdapter extends RecyclerView.Adapter<FavouriteHomeAdap
 
         public void onBind(DetailProduct items) {
 //            mBinding.tvPrices.setText(new Utils().convertMoney(items.getPrice()));
-            mBinding.setUrlImage(items.getImage().get(0));
+            if (items.getImage().size() > 0) {
+                mBinding.setUrlImage(items.getImage().get(0));
+            }
             mBinding.setNameProduct(items.getName());
         }
     }
