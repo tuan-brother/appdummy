@@ -32,6 +32,14 @@
         <variable
             name="pricesInt"
             type="Integer" />
+
+        <variable
+            name="certificate"
+            type="String" />
+
+        <variable
+            name="origin"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -154,14 +162,28 @@
                         app:layout_constraintStart_toStartOf="@id/vpSlide"
                         app:layout_constraintTop_toBottomOf="@id/vpSlide" />
 
+                    <TextView
+                        android:id="@+id/distribute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:text="@string/distribute"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="@id/tvTitle"
+                        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/cateRecycleView"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        app:layout_constraintBottom_toTopOf="@id/tvPr"
+                        app:layout_constraintBottom_toBottomOf="@id/distribute"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/distribute"
                         app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                        app:layout_constraintTop_toTopOf="@id/distribute"
                         tools:listitem="@layout/item_category" />
 
                     <TextView
@@ -213,10 +235,61 @@
                         app:layout_constraintTop_toBottomOf="@id/tvPrices" />
 
                     <TextView
+                        android:id="@+id/tvTC"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="@string/tieu_chuan"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="@id/tvQL"
+                        app:layout_constraintTop_toBottomOf="@id/tvQL" />
+
+                    <TextView
+                        android:id="@+id/tvTCCT"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/robotoregular"
+                        android:gravity="center_horizontal"
+                        android:text="@{certificate}"
+                        android:textColor="@color/main_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tvTC"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvTC"
+                        app:layout_constraintTop_toTopOf="@id/tvTC" />
+
+                    <TextView
+                        android:id="@+id/tvSX"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8"
+                        android:fontFamily="@font/robotoregular"
+                        android:text="@string/xuat_xu"
+                        android:textSize="20sp"
+                        app:layout_constraintStart_toStartOf="@id/tvTC"
+                        app:layout_constraintTop_toBottomOf="@id/tvTC" />
+
+                    <TextView
+                        android:id="@+id/tvSXCT"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/robotoregular"
+                        android:gravity="center_horizontal"
+                        android:text="@{origin}"
+                        android:textColor="@color/main_color"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="@id/tvSX"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tvSX"
+                        app:layout_constraintTop_toTopOf="@id/tvSX" />
+
+                    <TextView
                         android:id="@+id/tvD"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8"
+                        android:fontFamily="@font/robotoregular"
                         android:text="@string/description"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="@id/tvDes"
@@ -236,7 +309,7 @@
                         app:colorClickableText="#2196F3"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tvD"
-                        app:layout_constraintTop_toBottomOf="@id/tvQuality"
+                        app:layout_constraintTop_toBottomOf="@id/tvSXCT"
                         app:trimCollapsedText="@string/show_more"
                         app:trimExpandedText="@string/show_less"
                         app:trimLength="100"
@@ -338,19 +411,19 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/tvTongTien" />
 
-                    <com.github.ybq.android.spinkit.SpinKitView
-                        android:id="@+id/spin_kit"
-                        style="@style/SpinKitView.Circle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:visibility="gone"
-                        app:SpinKit_Color="@color/purple_700"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/purple_700"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

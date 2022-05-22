@@ -12,9 +12,9 @@ public class FavoriteItem{
 	private String measure;
 	private String size;
 	private int price;
-	private String productId;
+	private String product_id;
 	private int V;
-	private String id;
+	private String _id;
 	private String exp;
 
 	public List<String> getImage(){
@@ -54,7 +54,7 @@ public class FavoriteItem{
 	}
 
 	public String getProductId(){
-		return productId;
+		return product_id;
 	}
 
 	public int getV(){
@@ -62,7 +62,7 @@ public class FavoriteItem{
 	}
 
 	public String getId(){
-		return id;
+		return _id;
 	}
 
 	public String getExp(){

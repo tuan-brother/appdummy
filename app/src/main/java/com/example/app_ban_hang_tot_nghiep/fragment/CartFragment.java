@@ -200,6 +200,11 @@ public class CartFragment extends Fragment implements CartAdapter.onItemClick {
             mBinding.spinKit.setVisibility(View.GONE);
             totalMoney = cart.getTotal();
             mBinding.setTotal(new Utils().convertMoney(cart.getTotal()));
+            if (cart.getProducts().size() > 0) {
+                mBinding.group.setVisibility(View.GONE);
+            } else {
+                mBinding.group.setVisibility(View.VISIBLE);
+            }
             mListData.clear();
             mListData.addAll(cart.getProducts());
             mBinding.recycleCart.getAdapter().notifyDataSetChanged();

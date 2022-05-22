@@ -35,13 +35,13 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
     public SharedPreferences mSharedPreferences;
     public DetailViewModel mViewModel;
     private SliderAdapterExample adapter;
-    private DetailProduct data;
+    private DetailProduct dataDetail;
     private ListCategoryAdapter mCategoryAdapter;
     private List<DetailProduct> mListDetail = new ArrayList<>();
 
     @Override
     public void ItemClick(DetailProduct items, Integer position) {
-        data = items;
+        dataDetail = items;
         setUpData(items);
         setUpImage(items);
     }
@@ -162,15 +162,19 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
         mBinding.imgAddFavourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mSharedPreferences.getString("tokenID", "xxx").equals("xxx")) {
-                    Intent intent = new Intent(requireContext(), LoginActivity.class);
-                    startActivityForResult(intent, 6677);
-                    return;
+                try {
+                    if (mSharedPreferences.getString("tokenID", "xxx").equals("xxx")) {
+                        Intent intent = new Intent(requireContext(), LoginActivity.class);
+                        startActivityForResult(intent, 6677);
+                        return;
+                    }
+                    token = mSharedPreferences.getString("tokenID", "xxx");
+                    Log.d("TAG234", "onClick: " + token);
+                    mBinding.spinKit.setVisibility(View.VISIBLE);
+                    mViewModel.addToFavourite(token, dataDetail.getId());
+                } catch (Exception ex){
+                    Toast.makeText(requireContext(), "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
                 }
-                token = mSharedPreferences.getString("tokenID", "xxx");
-                Log.d("TAG234", "onClick: " + token);
-                mBinding.spinKit.setVisibility(View.VISIBLE);
-                mViewModel.addToFavourite(token, data.getId());
             }
         });
     }
@@ -190,9 +194,13 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
         });
 
         mViewModel.listDetail.observe(getViewLifecycleOwner(), data -> {
+            mBinding.spinKit.setVisibility(View.GONE);
             mDetailProducts.clear();
             mDetailProducts.addAll(data);
-            setUpData(mDetailProducts.get(0));
+            if (data.size() > 0) {
+                setUpData(mDetailProducts.get(0));
+                dataDetail = mDetailProducts.get(0);
+            }
             mBinding.cateRecycleView.getAdapter().notifyDataSetChanged();
         });
 
@@ -250,6 +258,8 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
         mBinding.setPricesInt(items.getPrice());
         mBinding.setDescription(items.getDetail());
         mBinding.setQuality(items.getAmount());
+        mBinding.setCertificate(items.getCertificate());
+        mBinding.setOrigin(items.getOrigin());
 //        mBinding.setName(name);
 //        mBinding.setDescription(des);
 //        mBinding.setPrices(new Utils().convertMoney(prices));

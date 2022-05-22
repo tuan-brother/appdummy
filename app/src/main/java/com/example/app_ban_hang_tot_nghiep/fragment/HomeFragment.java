@@ -76,6 +76,9 @@ public class HomeFragment extends Fragment implements HomeAdapter.onItemClick, S
         mViewModel.listFavourite.observe(getViewLifecycleOwner(), data -> {
             mListFavourite.clear();
             mListFavourite.addAll(data);
+            if (data.size() > 0) {
+                mBinding.tvFavorite.setVisibility(View.VISIBLE);
+            }
             mBinding.recycleFavourite.getAdapter().notifyDataSetChanged();
         });
         mBinding.refreshData.setOnRefreshListener(this);
@@ -109,6 +112,7 @@ public class HomeFragment extends Fragment implements HomeAdapter.onItemClick, S
             public void run() {
                 try {
                     mViewModel.getListHomeData();
+                    mViewModel.getListFavourite(token);
                     ((MainActivity) requireActivity()).refreshData();
                     mBinding.refreshData.setRefreshing(false);
                 } catch (Exception ex) {
