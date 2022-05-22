@@ -114,6 +114,11 @@ public class MyBillFragment extends Fragment implements BillAdapter.onItemCatego
             mBinding.spinKit.setVisibility(View.GONE);
             listData.clear();
             listData.addAll(data);
+            if (data.size() > 0) {
+                mBinding.group.setVisibility(View.GONE);
+            } else {
+                mBinding.group.setVisibility(View.VISIBLE);
+            }
             mBinding.recycleBill.getAdapter().notifyDataSetChanged();
         });
         mViewModel.deleteSuccess.observe(getViewLifecycleOwner(), data -> {

@@ -27,6 +27,7 @@
                     android:text="@string/favorite_product"
                     android:textColor="@color/black"
                     android:textSize="18sp"
+                    android:visibility="gone"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView

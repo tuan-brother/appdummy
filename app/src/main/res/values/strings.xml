@@ -91,5 +91,10 @@
     <string name="status">Trạng thái</string>
     <string name="favorite_product">Sản phẩm yêu thích</string>
     <string name="list_menu_product">Các sản phẩm của cửa hàng</string>
+    <string name="tieu_chuan">Tiêu chuẩn</string>
+    <string name="xuat_xu">Xuất xứ</string>
+    <string name="distribute">Phân loại</string>
+    <string name="notifi_empty">Bạn chưa có đơn hàng nào hãy đặt đơn hàng và quay lại!!!</string>
+    <string name="notifi_empty_cart">Bạn chưa có sản phẩm nào hãy mua hàng và quay lại!!!</string>
 
 </resources>

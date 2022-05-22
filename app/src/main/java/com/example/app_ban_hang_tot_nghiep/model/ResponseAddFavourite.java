@@ -15,7 +15,7 @@ public class ResponseAddFavourite{
 	private int V;
 	private String name;
 	private String id;
-	private List<FavoriteItem> favorite;
+	private List<String> favorite;
 	private String email;
 
 	public String getAddress(){
@@ -66,7 +66,7 @@ public class ResponseAddFavourite{
 		return id;
 	}
 
-	public List<FavoriteItem> getFavorite(){
+	public List<String> getFavorite(){
 		return favorite;
 	}
 

@@ -67,6 +67,7 @@ public class DetailViewModel extends ViewModel {
         mApiService.addFavourite(token, variID).enqueue(new Callback<ResponseAddFavourite>() {
             @Override
             public void onResponse(Call<ResponseAddFavourite> call, Response<ResponseAddFavourite> response) {
+                Log.d("TAG345", "onResponse: " + response.isSuccessful() + response.code());
                 if (response.isSuccessful() && response.code() == 200) {
                     addDataSuccess.postValue(true);
                     return;
@@ -76,6 +77,7 @@ public class DetailViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ResponseAddFavourite> call, Throwable t) {
+                Log.d("TAG345", "onResponse: " + t.getMessage());
                 addDataSuccess.postValue(false);
             }
         });
