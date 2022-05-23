@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentRegisterBinding;
+import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.RegisterViewModel;
 
 public class RegisterFragment extends Fragment {
@@ -57,6 +58,10 @@ public class RegisterFragment extends Fragment {
             public void onClick(View view) {
                 if (mBinding.edtAccount.getText().toString().trim().equals("") | mBinding.edtPassword.getText().toString().trim().equals("") | mBinding.edtConfirm.getText().toString().trim().equals("")) {
                     Toast.makeText(requireContext(), "Không được để trống trường thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (!Utils.isValidEmail(mBinding.edtAccount.getText().toString().trim())) {
+                    Toast.makeText(requireContext(), "Format thông tin đăng nhập không chính xác", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!mBinding.edtPassword.getText().toString().trim().equals(mBinding.edtConfirm.getText().toString().trim())) {

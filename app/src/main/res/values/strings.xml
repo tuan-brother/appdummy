@@ -96,5 +96,10 @@
     <string name="distribute">Phân loại</string>
     <string name="notifi_empty">Bạn chưa có đơn hàng nào hãy đặt đơn hàng và quay lại!!!</string>
     <string name="notifi_empty_cart">Bạn chưa có sản phẩm nào hãy mua hàng và quay lại!!!</string>
+    <string name="input_address">Nhập địa chỉ giao hàng</string>
+    <string name="input_phone_number_user">Nhập số điện thoại</string>
+    <string name="input_email">Nhập Địa chỉ email</string>
+    <string name="input_name">Nhập tên</string>
+    <string name="input_phone">Số Điện Thoại</string>
 
 </resources>

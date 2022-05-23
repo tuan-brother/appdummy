@@ -38,6 +38,7 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
     private DetailProduct dataDetail;
     private ListCategoryAdapter mCategoryAdapter;
     private List<DetailProduct> mListDetail = new ArrayList<>();
+    private int countItem = 0;
 
     @Override
     public void ItemClick(DetailProduct items, Integer position) {
@@ -152,6 +153,11 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
                     startActivityForResult(intent, 6677);
                     return;
                 }
+
+                if (count > mBinding.getQuality()) {
+                    Toast.makeText(requireContext(), "Số lượng hàng hóa không đủ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 token = mSharedPreferences.getString("tokenID", "xxx");
                 Log.d("TAG234", "onClick: " + token);
                 mBinding.spinKit.setVisibility(View.VISIBLE);
@@ -172,7 +178,7 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
                     Log.d("TAG234", "onClick: " + token);
                     mBinding.spinKit.setVisibility(View.VISIBLE);
                     mViewModel.addToFavourite(token, dataDetail.getId());
-                } catch (Exception ex){
+                } catch (Exception ex) {
                     Toast.makeText(requireContext(), "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -257,7 +263,11 @@ public class DetailProductFragment extends Fragment implements ListCategoryAdapt
         mBinding.setPrices(new Utils().convertMoney(items.getPrice()));
         mBinding.setPricesInt(items.getPrice());
         mBinding.setDescription(items.getDetail());
-        mBinding.setQuality(items.getAmount());
+        if (items.getAmount() <= 0) {
+            mBinding.setQuality(0);
+        } else {
+            mBinding.setQuality(items.getAmount());
+        }
         mBinding.setCertificate(items.getCertificate());
         mBinding.setOrigin(items.getOrigin());
 //        mBinding.setName(name);

@@ -19,6 +19,7 @@ import com.example.app_ban_hang_tot_nghiep.ApiUtils;
 import com.example.app_ban_hang_tot_nghiep.MainActivity;
 import com.example.app_ban_hang_tot_nghiep.R;
 import com.example.app_ban_hang_tot_nghiep.databinding.FragmentLoginBinding;
+import com.example.app_ban_hang_tot_nghiep.utils.Utils;
 import com.example.app_ban_hang_tot_nghiep.viewmodel.LoginViewModel;
 
 public class LoginFragment extends Fragment {
@@ -85,6 +86,10 @@ public class LoginFragment extends Fragment {
         mLoginBinding.btnLogin.setOnClickListener(view -> {
             if (mLoginBinding.edtAccount.getText().toString().trim().equals("") | mLoginBinding.edtPassword.getText().toString().trim().equals("")) {
                 Toast.makeText(requireContext(), "Không được để trống thông tin", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!Utils.isValidEmail(mLoginBinding.edtAccount.getText().toString().trim())) {
+                Toast.makeText(requireContext(), "Format tài khoản không đúng", Toast.LENGTH_SHORT).show();
                 return;
             }
             mLoginBinding.spinKit.setVisibility(View.VISIBLE);
