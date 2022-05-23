@@ -78,7 +78,9 @@ public class BillInfoAdapter extends RecyclerView.Adapter<BillInfoAdapter.ViewHo
             mBinding.setPrices(new Utils().convertMoney(items.getPrice()));
             mBinding.setTitle(items.getProductName());
             mBinding.setDes(items.getAmount() + "");
-//            mBinding.setUrlImage(items.getImage().get(0));
+            if(items.getImage().size() > 0){
+                mBinding.setUrlImage(items.getImage().get(0));
+            }
         }
     }
 
