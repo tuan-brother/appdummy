@@ -119,7 +119,7 @@
                         android:layout_marginStart="@dimen/dp_24"
                         android:background="@drawable/bg_edittext_edit_info"
                         android:ellipsize="end"
-                        android:hint="Nhập địa chỉ giao hàng"
+                        android:hint="@string/input_address"
                         android:maxLines="1"
                         android:padding="@dimen/dp_12"
                         android:textSize="16sp"
@@ -141,7 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/robotoregular"
-                        android:text="Số Điện Thoại"
+                        android:text="@string/input_phone"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toBottomOf="@id/edtPhone"
@@ -154,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_24"
                         android:background="@drawable/bg_edittext_edit_info"
-                        android:hint="Nhập số điện thoại"
+                        android:hint="@string/input_phone_number_user"
                         android:inputType="phone"
                         android:padding="@dimen/dp_12"
                         android:textSize="16sp"
@@ -190,7 +190,7 @@
                         android:layout_marginStart="@dimen/dp_24"
                         android:background="@drawable/bg_edittext_edit_info"
                         android:ellipsize="end"
-                        android:hint="Nhập Địa chỉ email"
+                        android:hint="@string/input_email"
                         android:maxLines="1"
                         android:padding="@dimen/dp_12"
                         android:textSize="16sp"
@@ -227,7 +227,7 @@
                         android:layout_marginStart="@dimen/dp_24"
                         android:background="@drawable/bg_edittext_edit_info"
                         android:ellipsize="end"
-                        android:hint="Nhập tên"
+                        android:hint="@string/input_name"
                         android:maxLines="1"
                         android:padding="@dimen/dp_12"
                         android:textSize="16sp"
@@ -259,8 +259,8 @@
                         android:id="@+id/checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:checked="true"
+                        android:gravity="center"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -288,28 +288,6 @@
                         app:layout_constraintTop_toBottomOf="@id/checkBox" />
 
                     <TextView
-                        android:id="@+id/tvShipcode"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ship_code"
-                        android:textColor="@color/main_color"
-                        android:textSize="20sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/edtNotion" />
-
-                    <TextView
-                        android:id="@+id/shipcodePrices"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:text="@{shipCost}"
-                        android:textColor="@color/teal_200"
-                        android:textSize="20sp"
-                        app:layout_constraintBottom_toBottomOf="@id/tvShipcode"
-                        app:layout_constraintStart_toEndOf="@id/tvShipcode"
-                        app:layout_constraintTop_toTopOf="@id/tvShipcode" />
-
-                    <TextView
                         android:id="@+id/totalCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -318,7 +296,7 @@
                         android:textSize="25sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tvShipcode" />
+                        app:layout_constraintTop_toBottomOf="@id/edtNotion" />
 
 
                     <TextView

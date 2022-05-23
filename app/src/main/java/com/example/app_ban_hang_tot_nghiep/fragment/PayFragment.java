@@ -104,6 +104,16 @@ public class PayFragment extends Fragment {
                     Toast.makeText(requireContext(), "Vui lòng không để trống thông tin", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                if (!Utils.isValidEmail(mBinding.edtEmail.getText().toString().trim())) {
+                    Toast.makeText(requireContext(), "Địa chỉ email nhập không đúng format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (!Utils.isvalidCellPhone(mBinding.edtPhone.getText().toString().trim())) {
+                    Toast.makeText(requireContext(), "Số điện thoại nhập không đúng format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (mSharedPreferences.getString("tokenID", "xxx").equals("xxx")) {
                     Intent intent = new Intent(requireContext(), LoginActivity.class);
                     startActivity(intent);

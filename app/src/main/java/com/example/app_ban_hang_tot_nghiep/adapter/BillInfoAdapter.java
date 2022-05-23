@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.app_ban_hang_tot_nghiep.databinding.ItemListBillInfoBinding;
 import com.example.app_ban_hang_tot_nghiep.databinding.ItemListCartBinding;
 import com.example.app_ban_hang_tot_nghiep.model.ItemProductCart;
 import com.example.app_ban_hang_tot_nghiep.utils.Utils;
@@ -31,7 +32,7 @@ public class BillInfoAdapter extends RecyclerView.Adapter<BillInfoAdapter.ViewHo
     public BillInfoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
-        ItemListCartBinding binding = ItemListCartBinding.inflate(inflater, parent, false);
+        ItemListBillInfoBinding binding = ItemListBillInfoBinding.inflate(inflater, parent, false);
 
         return new BillInfoAdapter.ViewHolder(binding);
 
@@ -66,9 +67,9 @@ public class BillInfoAdapter extends RecyclerView.Adapter<BillInfoAdapter.ViewHo
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ItemListCartBinding mBinding;
+        ItemListBillInfoBinding mBinding;
 
-        public ViewHolder(ItemListCartBinding binding) {
+        public ViewHolder(ItemListBillInfoBinding binding) {
             super(binding.getRoot());
             mBinding = binding;
         }
